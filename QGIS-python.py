@@ -8,7 +8,7 @@ ucbt_table = QgsVectorLayer(UCBT,'UCBT_2022','ogr') #possivel pegar as informaç
 #ucbt_view_table = iface.addVectorLayer(UCBT,'UCBT_2022','ogr')
 #untrmt_view_table = iface.addVectorLayer(UNTRMT,'UNTRMT_2022','ogr')
 #ssdbt_view_table = iface.addVectorLayer(SSDBT,'SSDBT_2022','ogr')
-
+#teste
 
 layer = iface.activeLayer()
 filter_expression = "\"CTMT\" = 'IJAU11'"
