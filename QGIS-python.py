@@ -1,9 +1,14 @@
 import os
 
-UCBT = 'D:\py-dss-bdgd2dss\Cemig-D_4950_2022-12-31_V11_20230920-1643.gdb|layername=UCBT_tab'
+UCBT = 'D:\\py-dss-bdgd2dss\\Cemig-D_4950_2022-12-31_V11_20230920-1643.gdb|layername=UCBT_tab'
+#UNTRMT = 'D:\py-dss-bdgd2dss\Cemig-D_4950_2022-12-31_V11_20230920-1643.gdb|layername=UNTRMT
+#SSDBT = 'D:\py-dss-bdgd2dss\Cemig-D_4950_2022-12-31_V11_20230920-1643.gdb|layername=SSDBT'
 
 ucbt_table = QgsVectorLayer(UCBT,'UCBT_2022','ogr') #possivel pegar as informações sem adicionar camada
 #ucbt_view_table = iface.addVectorLayer(UCBT,'UCBT_2022','ogr')
+#untrmt_view_table = iface.addVectorLayer(UNTRMT,'UNTRMT_2022','ogr')
+#ssdbt_view_table = iface.addVectorLayer(SSDBT,'SSDBT_2022','ogr')
+
 
 layer = iface.activeLayer()
 filter_expression = "\"CTMT\" = 'IJAU11'"
@@ -14,7 +19,7 @@ collumnName = 'ENE_'
 
 request = QgsFeatureRequest().setFilterExpression(filter_expression)
 
-path = r"C:\Users\Andre\Downloads"
+path = r"C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS"
 
 if not os.path.exists(path):
     os.makedirs(path)
@@ -117,8 +122,8 @@ for col in ucbt_table.getFeatures(request):
     '''
     
 print(totalZeros)
-'''
+
 zeroPercent = (totalZeros)/count*100
 with open(os.path.join(path, filename), 'a') as file:
         file.write(zeroPercent)
-'''
+
