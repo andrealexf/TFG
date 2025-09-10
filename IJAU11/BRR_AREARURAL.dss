@@ -4,6 +4,45 @@ New monitor.PMONITOR220486 element=transformer.TRF_220486A terminal=1 mode=1 ppo
 AddBusMarker Bus=746760 code=15 color=Red size=4
 New monitor.PMONITOR214494 element=transformer.TRF_214494A terminal=1 mode=1 ppolar=no
 
-AddBusMarker Bus=746760 code=15 color=Red size=4
-New monitor.PMONITOR214494 element=transformer.TRF_214494A terminal=1 mode=1 ppolar=no
+AddBusMarker Bus=781659 code=15 color=Red size=4
+New monitor.PMONITOR1487958 element=transformer.TRF_1487958A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=781865 code=15 color=Red size=4
+New monitor.PMONITOR1487948 element=transformer.TRF_1487948A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=782269 code=15 color=Red size=4
+New monitor.PMONITOR168098 element=transformer.TRF_168098A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=783106 code=15 color=Red size=4
+New monitor.PMONITOR1081450 element=transformer.TRF_1081450A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=783345 code=15 color=Red size=4
+New monitor.PMONITOR1081464 element=transformer.TRF_1081464A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=784003 code=15 color=Red size=4
+New monitor.PMONITOR1081478 element=transformer.TRF_1081478A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=784894 code=15 color=Red size=4
+New monitor.PMONITOR745437 element=transformer.TRF_745437A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=798723 code=15 color=Red size=4
+New monitor.PMONITOR213269 element=transformer.TRF_213269A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=821828 code=15 color=Red size=4
+New monitor.PMONITOR173551 element=transformer.TRF_173551A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=823801 code=15 color=Red size=4
+New monitor.PMONITOR173579 element=transformer.TRF_173579A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=846487 code=15 color=Red size=4
+New monitor.PMONITOR173544 element=transformer.TRF_173544A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=874685 code=15 color=Red size=4
+New monitor.PMONITOR213276 element=transformer.TRF_213276A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=875273 code=15 color=Red size=4
+New monitor.PMONITOR213220 element=transformer.TRF_213220A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=875985 code=15 color=Red size=4
+New monitor.PMONITOR173565 element=transformer.TRF_173565A terminal=1 mode=1 ppolar=no
 

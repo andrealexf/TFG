@@ -22,20 +22,29 @@ def createFile(name, tab):
     print(path)
     print(filename)
     
-    for feat in tab.getFeatures():
+    vist = set()
     
-        text = ''.join(('AddBusMarker Bus=', feat['PAC_2'],' code=15 color=Red size=4','\n',
+    for feat in tab.getFeatures():
+        
+        pac2 = feat['PAC_2']
+        
+        if pac2 in vist:
+            continue 
+        
+        vist.add(pac2)
+    
+        text = ''.join(('AddBusMarker Bus=', pac2,' code=15 color=Red size=4','\n',
                         'New monitor.PMONITOR', str(f"{feat['COD_ID']:.0f}") ,' element=transformer.TRF_',
                         str(f"{feat['COD_ID']:.0f}") , 'A terminal=1 mode=1 ppolar=no','\n','\n'))
-       
+        print(text)
         with open(os.path.join(path, filename), 'a') as file:
             file.write(str(text).strip("'"))
     
         count += 1
-    
+        '''
         if count >= 3:
             break
-  
+        '''
 
 def getBRR(brr):
         bairro = {
