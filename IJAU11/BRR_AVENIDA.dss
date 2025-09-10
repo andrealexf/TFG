@@ -1,0 +1,38 @@
+AddBusMarker Bus=160016883 code=15 color=Red size=4 !buses=[160016883 160016443]
+New monitor.PMONITOR1444005 element=transformer.TRF_1444005A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=128399044 code=15 color=Red size=4 !buses=[128399044 70266998]
+New monitor.PMONITOR974413 element=transformer.TRF_974413A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=176026881 code=15 color=Red size=4 !buses=[176026881 723387]
+New monitor.PMONITOR166488 element=transformer.TRF_166488A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=128399051 code=15 color=Red size=4 !buses=[128399051 727545]
+New monitor.PMONITOR166803 element=transformer.TRF_166803A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=175656174 code=15 color=Red size=4 !buses=[175656174 722372]
+New monitor.PMONITOR166425 element=transformer.TRF_166425A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=175656175 code=15 color=Red size=4 !buses=[175656175 723716]
+New monitor.PMONITOR166523 element=transformer.TRF_166523A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=160016879 code=15 color=Red size=4 !buses=[160016879 723009]
+New monitor.PMONITOR166467 element=transformer.TRF_166467A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=128399037 code=15 color=Red size=4 !buses=[128399037 725928]
+New monitor.PMONITOR166684 element=transformer.TRF_166684A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=160016882 code=15 color=Red size=4 !buses=[160016882 723233]
+New monitor.PMONITOR166481 element=transformer.TRF_166481A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=160016878 code=15 color=Red size=4 !buses=[160016878 722834]
+New monitor.PMONITOR166453 element=transformer.TRF_166453A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=121959716 code=15 color=Red size=4 !buses=[121959716 721056]
+New monitor.PMONITOR166348 element=transformer.TRF_166348A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=121959723 code=15 color=Red size=4 !buses=[121959723 721567]
+New monitor.PMONITOR166376 element=transformer.TRF_166376A terminal=1 mode=1 ppolar=no
+
+
+!Numero de transformadores no bairro: 12

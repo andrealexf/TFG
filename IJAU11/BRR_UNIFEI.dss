@@ -1,0 +1,5 @@
+AddBusMarker Bus=183449179 code=15 color=Red size=4 !buses=[183449179 743316]
+New monitor.PMONITOR167944 element=transformer.TRF_167944A terminal=1 mode=1 ppolar=no
+
+
+!Numero de transformadores no bairro: 1

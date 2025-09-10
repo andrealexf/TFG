@@ -1,0 +1,29 @@
+AddBusMarker Bus=157773869 code=15 color=Red size=4 !buses=[157773869 741769]
+New monitor.PMONITOR167839 element=transformer.TRF_167839A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=152482708 code=15 color=Red size=4 !buses=[152482708 738766]
+New monitor.PMONITOR167601 element=transformer.TRF_167601A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=152482707 code=15 color=Red size=4 !buses=[152482707 738164]
+New monitor.PMONITOR167559 element=transformer.TRF_167559A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=121960780 code=15 color=Red size=4 !buses=[121960780 734251]
+New monitor.PMONITOR167230 element=transformer.TRF_167230A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=152482709 code=15 color=Red size=4 !buses=[152482709 739228]
+New monitor.PMONITOR167636 element=transformer.TRF_167636A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=157773868 code=15 color=Red size=4 !buses=[157773868 740313]
+New monitor.PMONITOR167706 element=transformer.TRF_167706A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=121960815 code=15 color=Red size=4 !buses=[121960815 731906]
+New monitor.PMONITOR167083 element=transformer.TRF_167083A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=152482711 code=15 color=Red size=4 !buses=[152482711 146380924]
+New monitor.PMONITOR1079182 element=transformer.TRF_1079182A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=176050853 code=15 color=Red size=4 !buses=[176050853 953743]
+New monitor.PMONITOR212436 element=transformer.TRF_212436A terminal=1 mode=1 ppolar=no
+
+
+!Numero de transformadores no bairro: 9

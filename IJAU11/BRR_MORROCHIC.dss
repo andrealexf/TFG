@@ -1,0 +1,104 @@
+AddBusMarker Bus=160316785 code=15 color=Red size=4 !buses=[160316785 148702926]
+New monitor.PMONITOR1390338 element=transformer.TRF_1390338A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=180048140 code=15 color=Red size=4 !buses=[180048140 5264567]
+New monitor.PMONITOR761502 element=transformer.TRF_761502A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=160316784 code=15 color=Red size=4 !buses=[160316784 3000347]
+New monitor.PMONITOR643741 element=transformer.TRF_643741A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=163945822 code=15 color=Red size=4 !buses=[163945822 731185]
+New monitor.PMONITOR167027 element=transformer.TRF_167027A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=160371930 code=15 color=Red size=4 !buses=[160371930 723639]
+New monitor.PMONITOR166516 element=transformer.TRF_166516A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=160371926 code=15 color=Red size=4 !buses=[160371926 725333]
+New monitor.PMONITOR166642 element=transformer.TRF_166642A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=183377996 code=15 color=Red size=4 !buses=[183377996 725550]
+New monitor.PMONITOR166656 element=transformer.TRF_166656A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=175863639 code=15 color=Red size=4 !buses=[175863639 726824]
+New monitor.PMONITOR166761 element=transformer.TRF_166761A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=175863622 code=15 color=Red size=4 !buses=[175863622 726530]
+New monitor.PMONITOR166740 element=transformer.TRF_166740A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=128332383 code=15 color=Red size=4 !buses=[128332383 725060]
+New monitor.PMONITOR166621 element=transformer.TRF_166621A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=175863623 code=15 color=Red size=4 !buses=[175863623 724822]
+New monitor.PMONITOR166607 element=transformer.TRF_166607A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=175863626 code=15 color=Red size=4 !buses=[175863626 724528]
+New monitor.PMONITOR166586 element=transformer.TRF_166586A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=180048142 code=15 color=Red size=4 !buses=[180048142 726334]
+New monitor.PMONITOR166726 element=transformer.TRF_166726A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=168648041 code=15 color=Red size=4 !buses=[168648041 730429]
+New monitor.PMONITOR166985 element=transformer.TRF_166985A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=121960626 code=15 color=Red size=4 !buses=[121960626 725879]
+New monitor.PMONITOR166670 element=transformer.TRF_166670A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=169739935 code=15 color=Red size=4 !buses=[169739935 2827076]
+New monitor.PMONITOR619444 element=transformer.TRF_619444A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=160371929 code=15 color=Red size=4 !buses=[160371929 727181]
+New monitor.PMONITOR166782 element=transformer.TRF_166782A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=160371925 code=15 color=Red size=4 !buses=[160371925 724990]
+New monitor.PMONITOR166614 element=transformer.TRF_166614A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=168648040 code=15 color=Red size=4 !buses=[168648040 728042]
+New monitor.PMONITOR166838 element=transformer.TRF_166838A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=128332390 code=15 color=Red size=4 !buses=[128332390 724311]
+New monitor.PMONITOR166565 element=transformer.TRF_166565A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=159998980 code=15 color=Red size=4 !buses=[159998980 727909]
+New monitor.PMONITOR166824 element=transformer.TRF_166824A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=128332348 code=15 color=Red size=4 !buses=[128332348 727090]
+New monitor.PMONITOR166775 element=transformer.TRF_166775A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=183377997 code=15 color=Red size=4 !buses=[183377997 725193]
+New monitor.PMONITOR166628 element=transformer.TRF_166628A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=168648042 code=15 color=Red size=4 !buses=[168648042 969325]
+New monitor.PMONITOR216622 element=transformer.TRF_216622A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=121960654 code=15 color=Red size=4 !buses=[121960654 910616]
+New monitor.PMONITOR201306 element=transformer.TRF_201306A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=165897620 code=15 color=Red size=4 !buses=[165897620 728441]
+New monitor.PMONITOR166859 element=transformer.TRF_166859A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=168648037 code=15 color=Red size=4 !buses=[168648037 727335]
+New monitor.PMONITOR166789 element=transformer.TRF_166789A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=160371923 code=15 color=Red size=4 !buses=[160371923 151484566]
+New monitor.PMONITOR1404310 element=transformer.TRF_1404310A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=169739936 code=15 color=Red size=4 !buses=[169739936 169733251]
+New monitor.PMONITOR1469212 element=transformer.TRF_1469212A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=155704229 code=15 color=Red size=4 !buses=[155704229 722911]
+New monitor.PMONITOR166460 element=transformer.TRF_166460A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=155704227 code=15 color=Red size=4 !buses=[155704227 723835]
+New monitor.PMONITOR166530 element=transformer.TRF_166530A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=180756511 code=15 color=Red size=4 !buses=[180756511 720314]
+New monitor.PMONITOR166306 element=transformer.TRF_166306A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=180756510 code=15 color=Red size=4 !buses=[180756510 720958]
+New monitor.PMONITOR166341 element=transformer.TRF_166341A terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=128332355 code=15 color=Red size=4 !buses=[128332355 816151]
+New monitor.PMONITOR173047 element=transformer.TRF_173047A terminal=1 mode=1 ppolar=no
+
+
+!Numero de transformadores no bairro: 34
