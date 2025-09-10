@@ -1,47 +1,66 @@
 import os
 
+path = r'C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS\IJAU11'
 layer = 'D:\\py-dss-bdgd2dss\\UNTRMTJOINs|layername=UNTRMTJOIN-AREARURAL'
 table = QgsVectorLayer(layer,'UNTRTMJOINs','ogr')
 
-for i in range(15):
+filename=''
 
+def createFile(name, tab):
+
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    filename = 'BRR_'+name+'.dss'
+    print(filename)
+
+    with open(os.path.join(path, filename), 'w') as file:
+        file.write("")
+    
+    
     count = 0
-    def getBRR(brr):
-        bairro = {
-            "0": "UNTRMTJOIN-AREARURAL",
-            "1": "UNTRMTJOIN-AVENIDA",
-            "2": "UNTRMTJOIN-BOAVISTA",
-            "3": "UNTRMTJOIN-BPS",
-            "4": "UNTRMTJOIN-CENTRO",
-            "5": "UNTRMTJOIN-CRUZEIRO",
-            "6": "UNTRMTJOIN-ESTIVA",
-            "7": "UNTRMTJOIN-MORROCHIC",
-            "8": "UNTRMTJOIN-NOSSASENHORADAAGONIA",
-            "9": "UNTRMTJOIN-PINHEIRINHO",
-            "10": "UNTRMTJOIN-SANTOANTONIO",
-            "11": "UNTRMTJOIN-SAOVICENTE",
-            "12": "UNTRMTJOIN-UNIFEI",
-            "13": "UNTRMTJOIN-VILAISABEL",
-            "14": "UNTRMTJOIN-VILARUBENS"
-        }
+    print(path)
+    print(filename)
     
-        return bairro.get(brr, "Bairro não encontrado")
+    for feat in tab.getFeatures():
     
-    '''
-    name = "UNTRMTJOINs — "+getBRR(str(i))
-    layer = QgsProject.instance().mapLayersByName(name)[0]
-    '''
-    
-    layer = 'D:\\py-dss-bdgd2dss\\UNTRMTJOINs|layername='+getBRR(str(i))
-    table = QgsVectorLayer(layer,'UNTRTMJOINs','ogr')
-    
-    for feat in table.getFeatures():
-    
-        print(feat['JOINBRR'])
-    
+        text = ''.join(('AddBusMarker Bus=', feat['PAC_2'],' code=15 color=Red size=4','\n',
+                        'New monitor.PMONITOR', str(f"{feat['COD_ID']:.0f}") ,' element=transformer.TRF_',
+                        str(f"{feat['COD_ID']:.0f}") , 'A terminal=1 mode=1 ppolar=no','\n','\n'))
+       
+        with open(os.path.join(path, filename), 'a') as file:
+            file.write(str(text).strip("'"))
     
         count += 1
     
         if count >= 3:
             break
+  
+
+def getBRR(brr):
+        bairro = {
+            "0": "AREARURAL",
+            "1": "AVENIDA",
+            "2": "BOAVISTA",
+            "3": "BPS",
+            "4": "CENTRO",
+            "5": "CRUZEIRO",
+            "6": "ESTIVA",
+            "7": "MORROCHIC",
+            "8": "NOSSASENHORADAAGONIA",
+            "9": "PINHEIRINHO",
+            "10": "SANTOANTONIO",
+            "11": "SAOVICENTE",
+            "12": "UNIFEI",
+            "13": "VILAISABEL",
+            "14": "VILARUBENS"
+        }
     
+        return bairro.get(brr, "Bairro não encontrado")
+
+for i in range(1):
+
+    layer = 'D:\\py-dss-bdgd2dss\\UNTRMTJOINs|layername=UNTRMTJOIN-'+getBRR(str(i))
+    table = QgsVectorLayer(layer,'UNTRTMJOINs','ogr')
+    createFile(getBRR(str(i)), table)
+   
