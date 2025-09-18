@@ -11,8 +11,11 @@ Redirect "CurvaCarga_2022124950_IJAU11_--MBS-1--T--.dss"
 Redirect "CargasBT_DU01_2022124950_IJAU11_--MBS-1--T--.dss"
 Redirect "CargasMT_DU01_2022124950_IJAU11_--MBS-1--T--.dss"
 
-!Redirect "GD_BT_2022124950_IJAU11_--MBS-1--T--.dss"
-!Redirect "GD_MT_2022124950_IJAU11_--MBS-1--T--.dss"
+!Redirect "BRR_AREARURAL.dss"
+
+New monitor.TOTALvoltage element=line.SMT_1128316 terminal=1 mode=0
+New monitor.TOTALpower element=line.SMT_1128316 terminal=1 mode=1 ppolar=no
+
 
 Set mode = daily
 Set Voltagebases = [0.22 0.24 13.8]
@@ -23,7 +26,10 @@ Set maxcontroliter = 10
 !Solve mode = direct
 Solve
 
+!Plot monitor object=TOTALvoltage channels=(1 3 5) bases=[7967 7967 7967]
+Plot monitor object=TOTALpower channels=(1 3 5) 
+
+
 buscoords buscoords.csv
 
-Redirect "transformerBusMarker.dss"
 
