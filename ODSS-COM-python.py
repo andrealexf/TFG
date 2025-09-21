@@ -57,54 +57,60 @@ DSSText.Command = 'Redirect ' + mydir + '/BRR_VILAISABEL.dss'
 '''
 
 DSSSolution.Solve()
-'''
-linha = "smt_2621843"
-LineActive = DSSTopology.SetBranchActive(f"Line.{linha}")
-assert LineActive, "No line"
-'''
 
-alvo = "Line.smt_2621843".lower()   # a sua linha X
+#--------------------------------------
 
-ok = DSSTopology.First > 0
-found = False
-while ok:
-    if DSSTopology.BranchName.lower() == alvo:
-        found = True
-        break
-    ok = DSSTopology.Next > 0
+def defineBranchName(alvo: str) -> bool:
 
-if not found:
-    raise RuntimeError("Ramo 'Line.X' não encontrado na Topology")
-#-----------------------------------------------------------
-if DSSTopology.ForwardBranch > 0: #vai para o próximo elemento
+    ok = DSSTopology.First > 0
+    while ok:
+        if DSSTopology.BranchName.lower() == alvo.lower():
+            DSSCircuit.SetActiveElement(DSSTopology.BranchName)
+            return True
+        ok = DSSTopology.Next > 0
 
-    prox_nome = DSSTopology.BranchName
-    print("Próximo elemento: ",prox_nome)
+    return False
 
-else:
-    print("Não há ramo")
+def busLoads(bus_base: str): #cargas conectadas à barra
+    alvo = norm(bus_base)
+    loadlist = []
+    loads = DSSCircuit.Loads
+    i = loads.First
 
-DSSCircuit.SetActiveBus('981764')
-DSSCircuit.SetActiveElement('Line.smt_2621843')
-#print(DSSCktElement.Name)
+    while i > 0:
+        if alvo in [norm(b) for b in DSSCktElement.BusNames]:
+            loadlist.append(DSSCktElement.Name.split(".", 1)[1])  # só o nome depois do ponto
 
-DSSLines = DSSCircuit.Lines
+        i = loads.Next
 
-DSSCircuit.SetActiveClass('Transformer')
-lineList = []
+    return loadlist
 
-print(DSSLines.Bus1)
-print(DSSCircuit.NextElement)
-#print(DSSCircuit.Transformers.Next)
-#print(DSSLines.Next)
-#i = DSSCircuit.SetActiveBus('981764')
+def norm(b):
+    return (b or "").split(".", 1)[0].lower()
 
-#print(DSSActiveBus.LineList)
+alvo = "Transformer.trf_220486a".lower()  #seta o nome de um transformador para obter as cargas conectadas a ele
+defineBranchName(alvo)
 
-Monitors = DSSCircuit.Monitors.AllNames
+ramal =''
+bus1 =''
+bus2 =''
 
-print (str(len(Monitors)) + ' Monitors')
-DSSText.Command = "Plot monitor object=TOTALpower channels=(1 3 5)"
+while (DSSTopology.BranchName.split(".",1)[1]).split("_", 1)[0] != "smt": #enquanto line não for smt...
+
+    bus1 = DSSCktElement.BusNames[0]
+    bus2 = DSSCktElement.BusNames[1]
+    ramal = DSSTopology.BranchName
+    DSSTopology.ForwardBranch
+
+defineBranchName(ramal)
+print("Active Element:",DSSCktElement.Name)
+print("Branch Name:",DSSTopology.BranchName)
+print("")
+print("Nome da linha: ", DSSTopology.BranchName,'\n', "Bus2: ", bus2,'\n', "Quantidade de cargas conectadas: ", len(busLoads(bus2)), busLoads(bus2))
+
+
+#Monitors = DSSCircuit.Monitors.AllNames
+#print (str(len(Monitors)) + ' Monitors')
 
 #- Circuit Summary -
 
