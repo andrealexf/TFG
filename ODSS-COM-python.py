@@ -71,47 +71,59 @@ def defineBranchName(alvo: str) -> bool:
 
     return False
 
+def getLoads(transformer):
+    defineBranchName(transformer)
+    global bus1
+    global bus2
+    teste = []
+    loadList = []
+
+    while ((DSSTopology.BranchName.split(".", 1)[1]).split("_", 1)[0])[:3] != "smt":  # enquanto line não for smt...
+
+        bus1 = DSSCktElement.BusNames[0]
+        bus2 = DSSCktElement.BusNames[1]
+        print(DSSTopology.BranchName)
+        if busLoads(bus2):
+            print(" ", busLoads(bus2))
+            teste.append(busLoads(bus2))
+
+            if (busLoads(bus2)[0].split("_", 1)[1])[:2] != "ip":
+                loadList.append(busLoads(bus2))
+
+        ramal = DSSTopology.BranchName
+        DSSTopology.ForwardBranch
+
+    defineBranchName(ramal)
+    print("Número de cargas no transformador:", alvo, " :", len(teste), teste)
+    print("Número de cargas no transformador (excluindo iluminação):", len(loadList), loadList)
+    return bus1, bus2
+
 def busLoads(bus_base: str): #cargas conectadas à barra
     alvo = norm(bus_base)
-    loadlist = []
+    allLoadList = []
+
     loads = DSSCircuit.Loads
     i = loads.First
 
     while i > 0:
         if alvo in [norm(b) for b in DSSCktElement.BusNames]:
-            loadlist.append(DSSCktElement.Name.split(".", 1)[1])  # só o nome depois do ponto
+            allLoadList.append(DSSCktElement.Name.split(".", 1)[1])  # só o nome depois do ponto
 
         i = loads.Next
 
-    return loadlist
+    return allLoadList
 
 def norm(b):
     return (b or "").split(".", 1)[0].lower()
 
-alvo = "transformer.TRF_1081464A".lower()  #seta o nome de um transformador para obter as cargas conectadas a ele
-defineBranchName(alvo)
+alvo = "transformer.TRF_1081464A".lower()
+getLoads(alvo)#obtem as cargas conectadas a um transformador
 
-ramal =''
-bus1 =''
-bus2 =''
-
-while (DSSTopology.BranchName.split(".",1)[1]).split("_", 1)[0] != "smt": #enquanto line não for smt...
-
-    bus1 = DSSCktElement.BusNames[0]
-    bus2 = DSSCktElement.BusNames[1]
-    print(DSSTopology.BranchName)
-    if busLoads(bus2):
-        print(" ",busLoads(bus2))
-
-    ramal = DSSTopology.BranchName
-    DSSTopology.ForwardBranch
-
-defineBranchName(ramal)
 print("")
 print("Active Element:",DSSCktElement.Name)
 print("Branch Name:",DSSTopology.BranchName)
 print("")
-print("Nome da linha: ", DSSTopology.BranchName,'\n', "Bus2: ", bus2,'\n', "Quantidade de cargas conectadas: ", len(busLoads(bus2)), busLoads(bus2))
+print("Nome da ultima linha: ", DSSTopology.BranchName,'\n', "Bus2: ", bus2,'\n', "Quantidade de cargas conectadas: ", len(busLoads(bus2)), busLoads(bus2))
 
 
 #Monitors = DSSCircuit.Monitors.AllNames
