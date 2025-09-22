@@ -88,7 +88,7 @@ def busLoads(bus_base: str): #cargas conectadas à barra
 def norm(b):
     return (b or "").split(".", 1)[0].lower()
 
-alvo = "Transformer.trf_220486a".lower()  #seta o nome de um transformador para obter as cargas conectadas a ele
+alvo = "transformer.TRF_1081464A".lower()  #seta o nome de um transformador para obter as cargas conectadas a ele
 defineBranchName(alvo)
 
 ramal =''
@@ -99,10 +99,15 @@ while (DSSTopology.BranchName.split(".",1)[1]).split("_", 1)[0] != "smt": #enqua
 
     bus1 = DSSCktElement.BusNames[0]
     bus2 = DSSCktElement.BusNames[1]
+    print(DSSTopology.BranchName)
+    if busLoads(bus2):
+        print(" ",busLoads(bus2))
+
     ramal = DSSTopology.BranchName
     DSSTopology.ForwardBranch
 
 defineBranchName(ramal)
+print("")
 print("Active Element:",DSSCktElement.Name)
 print("Branch Name:",DSSTopology.BranchName)
 print("")

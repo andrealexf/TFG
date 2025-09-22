@@ -16,7 +16,7 @@ New monitor.PMONITOR168098 element=transformer.TRF_168098A terminal=1 mode=1 ppo
 AddBusMarker Bus=169867810 code=15 color=Red size=4 !buses=[169867810 136507886]
 New monitor.PMONITOR1081450 element=transformer.TRF_1081450A terminal=1 mode=1 ppolar=no
 
-AddBusMarker Bus=169867812 code=15 color=Red size=4 !buses=[169867812 136514599]
+AddBusMarker Bus=169867812 code=15 color=Green size=4 !buses=[169867812 136514599]
 New monitor.PMONITOR1081464 element=transformer.TRF_1081464A terminal=1 mode=1 ppolar=no
 
 AddBusMarker Bus=169867813 code=15 color=Red size=4 !buses=[169867813 136520108]
