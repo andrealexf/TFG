@@ -126,11 +126,13 @@ def createGD(loadList: list):
                 pot = energia/(24*30*0.17)
                 kva = math.ceil(pot)
 
-                print("Nome do ramal: ", ramal, " -- Média de Energia: ", energia)
+                #print("Nome do ramal: ", ramal, " -- Média de Energia: ", energia)
                 DSSCircuit.SetActiveElement("load."+(loadList[i])[0])
                 bus = str(DSSCktElement.BusNames).strip("(',')")
-                print('New "PVsystem.GD.BT.'+ramal+'" phases=1 bus1='+bus+' conn=Delta kv=0.22 pf=0.92 pmpp='+f"{pot:.2f}"+' kva='+f"{kva:.2f}"+' irradiance=0.98')
+                pn = phasesNumber(bus)
+                print('New "PVsystem.GD.BT.'+ramal+'" phases='+pn+' bus1='+bus+' conn=Delta kv=0.22 pf=0.92 pmpp='+f"{pot:.2f}"+' kva='+f"{kva:.2f}"+' irradiance=0.98')
                 print('~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp')
+                print('')
 
 def busLoads(bus_base: str): #cargas conectadas à barra
     alvo = norm(bus_base)
@@ -146,6 +148,16 @@ def busLoads(bus_base: str): #cargas conectadas à barra
         i = loads.Next
 
     return allLoadList
+
+def phasesNumber(bus: str) -> str:
+
+    phases = bus.count(".")
+
+    switch = {
+        3: 1,
+        4: 3
+    }
+    return str(switch.get(phases))
 
 def norm(b):
     return (b or "").split(".", 1)[0].lower()
