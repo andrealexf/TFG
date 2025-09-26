@@ -12,6 +12,7 @@ import matplotlib as mpl
 import math
 import pandas as pd
 import os
+import json
 import DSSStartup as dsss
 
 
@@ -163,10 +164,17 @@ def norm(b):
     return (b or "").split(".", 1)[0].lower()
 
 alvo = "transformer.TRF_1081464A".lower()
+
+with open("brr.json", "r", encoding="utf-8") as f:
+    bairros = json.load(f)
+
+print(bairros['avenida'])
+
+'''
 loadList = getLoads(alvo)#obtem as cargas conectadas a um transformador
 createGD(loadList)
 
-'''
+
 print("")
 print("Active Element:",DSSCktElement.Name)
 print("Branch Name:",DSSTopology.BranchName)
