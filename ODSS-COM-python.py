@@ -94,16 +94,20 @@ def getLoads(transformer):
 
         bus1 = DSSCktElement.BusNames[0]
         bus2 = DSSCktElement.BusNames[1]
-        #print(DSSTopology.BranchName)
+        print(DSSTopology.BranchName)
+        voltageBus()
+
         if busLoads(bus2):
-            #print(" ", busLoads(bus2))
+            print(" ", busLoads(bus2))
             loadIpList.append(busLoads(bus2))
 
             if (busLoads(bus2)[0].split("_", 1)[1])[:2] != "ip":
                 loadList.append(busLoads(bus2))
 
+
         ramal = DSSTopology.BranchName
         DSSTopology.ForwardBranch
+
 
     defineBranchName(ramal)
     #print("Número de cargas no transformador:", alvo, " :", len(loadIpList), loadIpList)
@@ -160,21 +164,35 @@ def phasesNumber(bus: str) -> str:
     }
     return str(switch.get(phases))
 
+def voltageBus():
+
+    p = DSSCircuit.ActiveBus.puVoltages
+    m = DSSCircuit.ActiveBus.VMagAngle
+
+    pu = ("%.5f %.5f %.5f %.5f %.5f %.5f") % DSSCircuit.ActiveBus.puVoltages
+    mag = ("%.4f %.4f %.4f %.4f %.4f %.4f") % DSSCircuit.ActiveBus.VMagAngle
+    print("Nome da barra e elemento:", DSSCircuit.ActiveCktElement.BusNames, " - ", DSSCircuit.ActiveCktElement.Name)
+    print("VMagAngle (V, graus):", mag)
+    print("puVoltages (p.u., Re/Im):", pu)
+    print("")
+
 def norm(b):
     return (b or "").split(".", 1)[0].lower()
 
 alvo = "transformer.TRF_1081464A".lower()
 
-with open("brr.json", "r", encoding="utf-8") as f:
+'''
+brr = os.path.join(diretorio, "brr.json")
+with open(brr, "r", encoding="utf-8") as f:
     bairros = json.load(f)
+for lista, trafo in bairros.items():
+    print(f"{lista}: {trafo}")
+'''
 
-print(bairros['avenida'])
+loadList = getLoads(alvo)#obtem as cargas conectadas a um transformador
+#createGD(loadList)
 
 '''
-loadList = getLoads(alvo)#obtem as cargas conectadas a um transformador
-createGD(loadList)
-
-
 print("")
 print("Active Element:",DSSCktElement.Name)
 print("Branch Name:",DSSTopology.BranchName)
