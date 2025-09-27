@@ -15,16 +15,15 @@ import os
 import json
 import DSSStartup as dsss
 
-
 os.chdir('C://Users//Andre//Downloads//TFG//Desenvolvimento-SegundoSemestre//QGIS-OPENDSS//IJAU11')
-mydir=os.getcwd()
+mydir = os.getcwd()
 print(mydir)
-
 
 DSSStartOK, DSSObj, DSSText = dsss.DSSStartup()
 if not DSSStartOK:
     print('Unable to start the OpenDSS Engine')
     import sys
+
     sys.exit()
 
 DSSCircuit = DSSObj.ActiveCircuit
@@ -70,18 +69,9 @@ with open(arquivo, "r", encoding="utf-8") as f:
     conteudo = f.readlines()
 
 
-#--------------------------------------
-
-def defineBranchName(alvo: str) -> bool:
-
-    ok = DSSTopology.First > 0
-    while ok:
-        if DSSTopology.BranchName.lower() == alvo.lower():
-            DSSCircuit.SetActiveElement(DSSTopology.BranchName)
-            return True
-        ok = DSSTopology.Next > 0
-
-    return False
+# --------------------------------------
+def norm(b):
+    return (b or "").split(".", 1)[0].lower()
 
 def getLoads(transformer):
     defineBranchName(transformer)
@@ -94,8 +84,9 @@ def getLoads(transformer):
 
         bus1 = DSSCktElement.BusNames[0]
         bus2 = DSSCktElement.BusNames[1]
+        print("")
         print(DSSTopology.BranchName)
-        voltageBus()
+        voltageBus(bus1)
 
         if busLoads(bus2):
             print(" ", busLoads(bus2))
@@ -103,19 +94,18 @@ def getLoads(transformer):
 
             if (busLoads(bus2)[0].split("_", 1)[1])[:2] != "ip":
                 loadList.append(busLoads(bus2))
-
+                load = busLoads(bus2)[0]
+                voltageBus(bus2, load)
 
         ramal = DSSTopology.BranchName
         DSSTopology.ForwardBranch
 
-
     defineBranchName(ramal)
-    #print("Número de cargas no transformador:", alvo, " :", len(loadIpList), loadIpList)
-    #print("Número de cargas no transformador (excluindo iluminação):", len(loadList), loadList)
+    # print("Número de cargas no transformador:", alvo, " :", len(loadIpList), loadIpList)
+    # print("Número de cargas no transformador (excluindo iluminação):", len(loadList), loadList)
     return loadList
 
 def createGD(loadList: list):
-
     for i in range(len(loadList)):
 
         encontrar = ((loadList[i])[0]).split("_")[1]
@@ -125,21 +115,22 @@ def createGD(loadList: list):
 
         for linha in conteudo:
             if linha.split(" ", 2)[1] == encontrar:
-
                 ramal = linha.split(" ", 2)[1]
                 energia = float(linha.split(" ")[3])
-                pot = energia/(24*30*0.17)
+                pot = energia / (24 * 30 * 0.17)
                 kva = math.ceil(pot)
 
-                #print("Nome do ramal: ", ramal, " -- Média de Energia: ", energia)
-                DSSCircuit.SetActiveElement("load."+(loadList[i])[0])
+                # print("Nome do ramal: ", ramal, " -- Média de Energia: ", energia)
+                DSSCircuit.SetActiveElement("load." + (loadList[i])[0])
                 bus = str(DSSCktElement.BusNames).strip("(',')")
                 pn = phasesNumber(bus)
-                print('New "PVsystem.GD.BT.'+ramal+'" phases='+pn+' bus1='+bus+' conn=Delta kv=0.22 pf=0.92 pmpp='+f"{pot:.2f}"+' kva='+f"{kva:.2f}"+' irradiance=0.98')
-                print('~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp')
+                print(
+                    'New "PVsystem.GD.BT.' + ramal + '" phases=' + pn + ' bus1=' + bus + ' conn=Delta kv=0.22 pf=0.92 pmpp=' + f"{pot:.2f}" + ' kva=' + f"{kva:.2f}" + ' irradiance=0.98')
+                print(
+                    '~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp')
                 print('')
 
-def busLoads(bus_base: str): #cargas conectadas à barra
+def busLoads(bus_base: str):  # cargas conectadas à barra
     alvo = norm(bus_base)
     allLoadList = []
 
@@ -154,8 +145,27 @@ def busLoads(bus_base: str): #cargas conectadas à barra
 
     return allLoadList
 
-def phasesNumber(bus: str) -> str:
+def voltageBus(bus1, load=None):
 
+    if load is not None:  # para cargas
+
+        DSSCircuit.SetActiveElement("Load." + load)
+        print("     Carga: ",DSSCircuit.ActiveCktElement.Name)
+        pu = DSSCircuit.ActiveBus.puVmagAngle
+        pu_round = tupleFormat(pu, casas=4)
+        print("     (p.u., ang): ", pu_round)
+        #overvoltage(pu_round)
+
+    else: #linhas e transformadores
+
+        DSSCircuit.SetActiveBus(bus1)
+        print("Linha: ", DSSCircuit.ActiveCktElement.Name)
+        pu = DSSCircuit.ActiveBus.puVmagAngle
+        pu_round = tupleFormat(pu, casas=4)
+        print("(p.u., ang): ", pu_round)
+        #overvoltage(pu_round)
+
+def phasesNumber(bus: str) -> str:
     phases = bus.count(".")
 
     switch = {
@@ -164,20 +174,27 @@ def phasesNumber(bus: str) -> str:
     }
     return str(switch.get(phases))
 
-def voltageBus():
+def tupleFormat(tupla, casas=4):
 
-    p = DSSCircuit.ActiveBus.puVoltages
-    m = DSSCircuit.ActiveBus.VMagAngle
+    return tuple(round(x, casas) for x in tupla)
 
-    pu = ("%.5f %.5f %.5f %.5f %.5f %.5f") % DSSCircuit.ActiveBus.puVoltages
-    mag = ("%.4f %.4f %.4f %.4f %.4f %.4f") % DSSCircuit.ActiveBus.VMagAngle
-    print("Nome da barra e elemento:", DSSCircuit.ActiveCktElement.BusNames, " - ", DSSCircuit.ActiveCktElement.Name)
-    print("VMagAngle (V, graus):", mag)
-    print("puVoltages (p.u., Re/Im):", pu)
-    print("")
+def overvoltage(tupla):
+    encontrados = []
 
-def norm(b):
-    return (b or "").split(".", 1)[0].lower()
+    for i, valor in enumerate(tupla):
+        if i % 2 == 0 and valor > 1.02:
+            print("Valor maior que 1.02")
+
+def defineBranchName(alvo: str) -> bool:
+    ok = DSSTopology.First > 0
+    while ok:
+        if DSSTopology.BranchName.lower() == alvo.lower():
+            DSSCircuit.SetActiveElement(DSSTopology.BranchName)
+            return True
+        ok = DSSTopology.Next > 0
+
+    return False
+
 
 alvo = "transformer.TRF_1081464A".lower()
 
@@ -189,8 +206,8 @@ for lista, trafo in bairros.items():
     print(f"{lista}: {trafo}")
 '''
 
-loadList = getLoads(alvo)#obtem as cargas conectadas a um transformador
-#createGD(loadList)
+loadList = getLoads(alvo)  # obtem as cargas conectadas a um transformador
+# createGD(loadList)
 
 '''
 print("")
@@ -200,10 +217,10 @@ print("")
 print("Nome da ultima linha: ", DSSTopology.BranchName,'\n', "Bus2: ", bus2,'\n', "Quantidade de cargas conectadas: ", len(busLoads(bus2)), busLoads(bus2))
 '''
 
-kW_BC = DSSCircuit.TotalPower[0] #in kW
-kvar_BC = DSSCircuit.TotalPower[1] #in kVAr
-kW_Loss_BC = DSSCircuit.Losses[0]/1000 #property returns values in W, here stored in kW
-kvar_Loss_BC = DSSCircuit.Losses[1]/1000 #property returns values in VAr, here stored in kVAr
+kW_BC = DSSCircuit.TotalPower[0]  # in kW
+kvar_BC = DSSCircuit.TotalPower[1]  # in kVAr
+kW_Loss_BC = DSSCircuit.Losses[0] / 1000  # property returns values in W, here stored in kW
+kvar_Loss_BC = DSSCircuit.Losses[1] / 1000  # property returns values in VAr, here stored in kVAr
 '''
 print("----------")
 print("Total kW delivered to the network: %.3f kW" %kW_BC)
