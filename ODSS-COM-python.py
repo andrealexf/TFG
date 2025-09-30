@@ -5,8 +5,9 @@
 !pip install matplotlib
 !pip install dss-python
 '''
-import math
 
+from pathlib import Path
+import math
 import numpy as np
 import matplotlib as mpl
 import math
@@ -101,11 +102,16 @@ def getLoads(transformer):
         DSSTopology.ForwardBranch
 
     defineBranchName(ramal)
+    #print("")
     # print("Número de cargas no transformador:", alvo, " :", len(loadIpList), loadIpList)
-    # print("Número de cargas no transformador (excluindo iluminação):", len(loadList), loadList)
+    #print("Número de cargas no transformador (excluindo iluminação):", len(loadList), loadList)
+    #print("")
     return loadList
 
 def createGD(loadList: list):
+
+    PVnumber = 0
+    norepeat = {}
     for i in range(len(loadList)):
 
         encontrar = ((loadList[i])[0]).split("_")[1]
@@ -117,18 +123,32 @@ def createGD(loadList: list):
             if linha.split(" ", 2)[1] == encontrar:
                 ramal = linha.split(" ", 2)[1]
                 energia = float(linha.split(" ")[3])
-                pot = energia / (24 * 30 * 0.17)
-                kva = math.ceil(pot)
 
-                # print("Nome do ramal: ", ramal, " -- Média de Energia: ", energia)
-                DSSCircuit.SetActiveElement("load." + (loadList[i])[0])
-                bus = str(DSSCktElement.BusNames).strip("(',')")
-                pn = phasesNumber(bus)
-                print(
-                    'New "PVsystem.GD.BT.' + ramal + '" phases=' + pn + ' bus1=' + bus + ' conn=Delta kv=0.22 pf=0.92 pmpp=' + f"{pot:.2f}" + ' kva=' + f"{kva:.2f}" + ' irradiance=0.98')
-                print(
-                    '~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp')
-                print('')
+                if energia == 0:
+                    continue
+
+                else:
+                    pvname = ((loadList[i])[0]).split("_")[1]
+                    norepeat[pvname] = norepeat.get(pvname, 0) + 1
+                    pvname = pvname if norepeat[pvname] == 1 else f"{pvname}_{norepeat[pvname]}"
+
+                    pot = energia / (24 * 30 * 0.17)
+                    kva = math.ceil(pot)
+
+                    DSSCircuit.SetActiveElement("load." + (loadList[i])[0])
+                    bus = str(DSSCktElement.BusNames).strip("(',')")
+                    pn = phasesNumber(bus)
+
+                    txt = 'New "PVsystem.GD.BT.' + pvname + '" phases=' + pn + ' bus1=' + bus + ' conn=Delta kv=0.22 pf=0.92 pmpp=' + f"{pot:.2f}" + ' kva=' + f"{kva:.2f}" + ' irradiance=0.98' + '\n' + '~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp' + '\n' + '\n'
+
+                    with pvdss.open("a", encoding="utf-8") as f:
+                        f.write(txt)
+
+                    #print('New "PVsystem.GD.BT.' + pvname + '" phases=' + pn + ' bus1=' + bus + ' conn=Delta kv=0.22 pf=0.92 pmpp=' + f"{pot:.2f}" + ' kva=' + f"{kva:.2f}" + ' irradiance=0.98'+'\n')
+                    #print('~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp'+"\n")
+                    #print('')
+                    PVnumber += 1
+    print(PVnumber)
 
 def busLoads(bus_base: str):  # cargas conectadas à barra
     alvo = norm(bus_base)
@@ -150,25 +170,26 @@ def voltageBus(bus1, load=None):
     if load is not None:  # para cargas
 
         DSSCircuit.SetActiveElement("Load." + load)
-        print("     Carga: ",DSSCircuit.ActiveCktElement.Name)
+        #print("     Carga: ",DSSCircuit.ActiveCktElement.Name)
         pu = DSSCircuit.ActiveBus.puVmagAngle
         pu_round = tupleFormat(pu, casas=4)
-        print("     (p.u., ang): ", pu_round)
+        #print("     (p.u., ang): ", pu_round)
         #overvoltage(pu_round)
 
     else: #linhas e transformadores
 
         DSSCircuit.SetActiveBus(bus1)
-        print("Linha: ", DSSCircuit.ActiveCktElement.Name)
+        #print("Linha: ", DSSCircuit.ActiveCktElement.Name)
         pu = DSSCircuit.ActiveBus.puVmagAngle
         pu_round = tupleFormat(pu, casas=4)
-        print("(p.u., ang): ", pu_round)
+        #print("(p.u., ang): ", pu_round)
         #overvoltage(pu_round)
 
 def phasesNumber(bus: str) -> str:
     phases = bus.count(".")
 
     switch = {
+        2: 1,
         3: 1,
         4: 3
     }
@@ -195,19 +216,37 @@ def defineBranchName(alvo: str) -> bool:
 
     return False
 
+try:
+    base_dir = Path(__file__).parent
 
-alvo = "transformer.TRF_1081464A".lower()
+except NameError:
+    base_dir = Path.cwd()
 
-'''
+pvdss = base_dir / "IJAU11/trf_166467a_pvsyst.dss"
+with pvdss.open("w", encoding="utf-8") as f:
+    f.write("")
+
 brr = os.path.join(diretorio, "brr.json")
 with open(brr, "r", encoding="utf-8") as f:
-    bairros = json.load(f)
-for lista, trafo in bairros.items():
-    print(f"{lista}: {trafo}")
-'''
+    brr = json.load(f)
 
+bairros = {}
+for lista, trafo in brr.items():
+
+    listaTrafo = trafo.split(',')
+    bairros[lista] = [int(x) for x in listaTrafo]
+
+#for nomeBairro, transformador in bairros.items():
+   # for i in range(len(bairros[nomeBairro])):
+
+        #print(bairros[nomeBairro][i])
+        #alvo = ("transformer.TRF_"+str(bairros[nomeBairro][i])+"a").lower()
+        #print(alvo)
+
+
+alvo="Transformer.trf_166467a".lower()
 loadList = getLoads(alvo)  # obtem as cargas conectadas a um transformador
-# createGD(loadList)
+createGD(loadList)
 
 '''
 print("")
@@ -216,6 +255,8 @@ print("Branch Name:",DSSTopology.BranchName)
 print("")
 print("Nome da ultima linha: ", DSSTopology.BranchName,'\n', "Bus2: ", bus2,'\n', "Quantidade de cargas conectadas: ", len(busLoads(bus2)), busLoads(bus2))
 '''
+
+
 
 kW_BC = DSSCircuit.TotalPower[0]  # in kW
 kvar_BC = DSSCircuit.TotalPower[1]  # in kVAr

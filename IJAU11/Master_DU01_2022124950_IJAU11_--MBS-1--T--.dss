@@ -1,5 +1,14 @@
 clear
+
 Redirect "CircuitoMT_2022124950_IJAU11_--MBS-1--T--.dss"
+
+New "LoadShape.PVIrrad_diaria" npts=24 interval=1 
+~ mult = [0 0 0 0 0 0 0.1 0.2 0.3 0.5 0.8 0.9 1.0 1.0 0.99 0.9 0.7 0.4 0.1 0 0 0 0 0] 
+New XYCurve.MyPvsT npts=4  xarray=[0  25  75  100]  yarray=[1.2 1.0 0.8  0.6] 
+New XYCurve.MyEff npts=4  xarray=[0.1  0.2  0.4  1.0]  yarray=[0.86  0.9  0.93  0.97] 
+New Tshape.MyTemp npts=24 interval=1 
+~ temp=[25, 25, 25, 25, 25, 25, 25, 25, 35, 40, 45, 50, 60, 60, 55, 40, 35, 30, 25, 25, 25, 25, 25, 25]
+
 Redirect "CodCondutor_2022124950_IJAU11_--MBS-1--T--.dss"
 Redirect "TransformadorMTMTMTBT_2022124950_IJAU11_--MBS-1--T--.dss"
 Redirect "SegmentosMT_2022124950_IJAU11_--MBS-1--T--.dss"
@@ -10,18 +19,18 @@ Redirect "Medidores_2022124950_IJAU11_--MBS-1--T--.dss"
 Redirect "CurvaCarga_2022124950_IJAU11_--MBS-1--T--.dss"
 Redirect "CargasBT_DU01_2022124950_IJAU11_--MBS-1--T--.dss"
 Redirect "CargasMT_DU01_2022124950_IJAU11_--MBS-1--T--.dss"
+!Redirect "trf_166467a_pvsyst.dss"
 
-!Redirect "BRR_AREARURAL.dss"
 
 New monitor.TOTALvoltage element=line.SMT_1128316 terminal=1 mode=0
 New monitor.TOTALpower element=line.SMT_1128316 terminal=1 mode=1 ppolar=no
 
-New "LoadShape.PVIrrad_diaria" npts=24 interval=1 
-~ mult = [0 0 0 0 0 0 0.1 0.2 0.3 0.5 0.8 0.9 1.0 1.0 0.99 0.9 0.7 0.4 0.1 0 0 0 0 0] 
-New XYCurve.MyPvsT npts=4  xarray=[0  25  75  100]  yarray=[1.2 1.0 0.8  0.6] 
-New XYCurve.MyEff npts=4  xarray=[0.1  0.2  0.4  1.0]  yarray=[0.86  0.9  0.93  0.97] 
-New Tshape.MyTemp npts=24 interval=1 
-~ temp=[25, 25, 25, 25, 25, 25, 25, 25, 35, 40, 45, 50, 60, 60, 55, 40, 35, 30, 25, 25, 25, 25, 25, 25]
+New monitor.trf166467a_voltage element=transformer.trf_166467a terminal=1 mode=0
+New monitor.trf166467a_power element=transformer.trf_166467a terminal=1 mode=1 ppolar=no
+
+AddBusMarker Bus=723009 code=15 color=Red size=4
+
+AddBusMarker Bus=723051code=15 color=Yellow size=4
 
 Set mode = daily
 Set Voltagebases = [0.22 0.24 13.8]
