@@ -41,9 +41,8 @@ DSSObj.AllowForms = 0
 DSSText.Command = 'clear'
 DSSText.Command = 'Compile ' + mydir + '/Master_DU01_2022124950_IJAU11_--MBS-1--T--.dss'
 
-DSSText.Command = 'Redirect ' + mydir + '/BRR_AREARURAL.dss'
-
 '''
+DSSText.Command = 'Redirect ' + mydir + '/BRR_AREARURAL.dss'
 DSSText.Command = 'Redirect ' + mydir + '/BRR_AVENIDA.dss'
 DSSText.Command = 'Redirect ' + mydir + '/BRR_BOAVISTA.dss'
 DSSText.Command = 'Redirect ' + mydir + '/BRR_BPS.dss'
@@ -59,7 +58,7 @@ DSSText.Command = 'Redirect ' + mydir + '/BRR_UNIFEI.dss'
 DSSText.Command = 'Redirect ' + mydir + '/BRR_VILAISABEL.dss'
 '''
 
-DSSSolution.Solve()
+#DSSSolution.Solve()
 
 nome_arquivo = "ramal.txt"
 
@@ -81,13 +80,13 @@ def getLoads(transformer):
     loadIpList = []
     loadList = []
 
-    while ((DSSTopology.BranchName.split(".", 1)[1]).split("_", 1)[0])[:3] != "smt":  # enquanto line não for smt...
+    while DSSTopology.BranchName != '' and ((DSSTopology.BranchName.split(".", 1)[1]).split("_", 1)[0])[:3] != "smt":  # enquanto line não for smt...
 
         bus1 = DSSCktElement.BusNames[0]
         bus2 = DSSCktElement.BusNames[1]
         print("")
         print(DSSTopology.BranchName)
-        voltageBus(bus1)
+        #voltageBus(bus1)
 
         if busLoads(bus2):
             print(" ", busLoads(bus2))
@@ -96,7 +95,7 @@ def getLoads(transformer):
             if (busLoads(bus2)[0].split("_", 1)[1])[:2] != "ip":
                 loadList.append(busLoads(bus2))
                 load = busLoads(bus2)[0]
-                voltageBus(bus2, load)
+                #voltageBus(bus2, load)
 
         ramal = DSSTopology.BranchName
         DSSTopology.ForwardBranch
@@ -216,37 +215,75 @@ def defineBranchName(alvo: str) -> bool:
 
     return False
 
-try:
-    base_dir = Path(__file__).parent
-
-except NameError:
-    base_dir = Path.cwd()
-
-pvdss = base_dir / "IJAU11/trf_166467a_pvsyst.dss"
-with pvdss.open("w", encoding="utf-8") as f:
-    f.write("")
+pv_dir = Path('C://Users//Andre//Downloads//TFG//Desenvolvimento-SegundoSemestre//BRR-PVSyst')
 
 brr = os.path.join(diretorio, "brr.json")
 with open(brr, "r", encoding="utf-8") as f:
     brr = json.load(f)
-
 bairros = {}
 for lista, trafo in brr.items():
 
     listaTrafo = trafo.split(',')
     bairros[lista] = [int(x) for x in listaTrafo]
 
-#for nomeBairro, transformador in bairros.items():
-   # for i in range(len(bairros[nomeBairro])):
 
-        #print(bairros[nomeBairro][i])
-        #alvo = ("transformer.TRF_"+str(bairros[nomeBairro][i])+"a").lower()
+for nomeBairro, transformador in bairros.items():
+
+    txt = nomeBairro+"-pv.dss"
+    #txt = "APAGAR-pv.dss"
+    pvdss = pv_dir / txt
+
+    with pvdss.open("w", encoding="utf-8") as f:
+        f.write("")
+
+    txtVP = (Path(r"C:\\Users\\Andre\\Downloads\\TFG\\Desenvolvimento-SegundoSemestre\\Resultados\\Verbose") / nomeBairro).resolve()
+
+    for i in range(len(bairros[nomeBairro])):
+
+        print(bairros[nomeBairro][i])
+        alvo = ("transformer.TRF_"+str(bairros[nomeBairro][i])+"a").lower()
         #print(alvo)
+        loadList = getLoads(alvo)
+        createGD(loadList)
+
+    datapath = str(txtVP)
+    print(datapath)
+    DSSText.Command = 'set datapath="'+datapath+'"'
+    DSSText.Command = 'set mode=daily'
+    DSSText.Command = 'set number=24'
+    DSSText.Command = 'set DemandInterval=true'
+    DSSText.Command = 'set overloadreport=true'
+    DSSText.Command = 'set voltexceptionreport=true'
+    DSSText.Command = 'set DIVerbose=true'
+    DSSText.Command = 'solve'
+    DSSText.Command = 'closeDI'
+
+    DSSText.Command = 'clear'
+    DSSText.Command = 'Compile ' + mydir + '/Master_DU01_2022124950_IJAU11_--MBS-1--T--.dss'
+
+'''
+for i in range(len(bairros['avenida'])):
+    alvo = ("transformer.TRF_"+str(bairros['avenida'][i])+"a").lower()
+    loadList = getLoads(alvo)
+    createGD(loadList)        
 
 
-alvo="Transformer.trf_166467a".lower()
-loadList = getLoads(alvo)  # obtem as cargas conectadas a um transformador
-createGD(loadList)
+#agora = ['Transformer.trf_1081464a']
+#alvo="Transformer.trf_166488a".lower() #transformador linha 7067 do isolated: trf_1081464a (). trf_166467a linha 26044 (165 cargas)
+#loadList = getLoads(alvo)  # obtem as cargas conectadas a um transformador
+#createGD(loadList)
+
+
+DSSText.Command = 'set datapath ="C://Users//Andre//Downloads//TFG//Desenvolvimento-SegundoSemestre//Resultados//Verbose//"'
+DSSText.Command = 'set mode=daily'
+DSSText.Command = 'set number=24'
+DSSText.Command = 'set DemandInterval=true'
+DSSText.Command = 'set overloadreport=true'
+DSSText.Command = 'set voltexceptionreport=true'
+DSSText.Command = 'set DIVerbose=true'
+DSSText.Command = 'solve'
+DSSText.Command = 'closeDI'
+'''
 
 '''
 print("")
@@ -262,7 +299,8 @@ kW_BC = DSSCircuit.TotalPower[0]  # in kW
 kvar_BC = DSSCircuit.TotalPower[1]  # in kVAr
 kW_Loss_BC = DSSCircuit.Losses[0] / 1000  # property returns values in W, here stored in kW
 kvar_Loss_BC = DSSCircuit.Losses[1] / 1000  # property returns values in VAr, here stored in kVAr
-'''
+
+print('')
 print("----------")
 print("Total kW delivered to the network: %.3f kW" %kW_BC)
 print("Total kVAr delivered to the network: %.3f kvar" %kvar_BC)
@@ -270,6 +308,5 @@ print("Total active losses: %.3f kW" %kW_Loss_BC)
 print("Percent losses: %.3f" %abs(((kW_Loss_BC/kW_BC)*100)) + "%")
 print("Total reactive losses: %.3f kVAr" %kvar_Loss_BC)
 print("----------")
-'''
 
 print('fim')

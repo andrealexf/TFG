@@ -1,8 +1,0 @@
-AddBusMarker Bus=150344160 code=15 color=Red size=4 !buses=[150344160 101273673]
-New monitor.PMONITOR1035201 element=transformer.TRF_1035201A terminal=1 mode=1 ppolar=no
-
-AddBusMarker Bus=121961431 code=15 color=Red size=4 !buses=[121961431 957376]
-New monitor.PMONITOR213220 element=transformer.TRF_213220A terminal=1 mode=1 ppolar=no
-
-
-!Numero de transformadores no bairro: 2
