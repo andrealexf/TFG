@@ -1,4 +1,5 @@
 clear
+set datapath = "C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS\IJAU11"
 
 Redirect "CircuitoMT_2022124950_IJAU11_--MBS-1--T--.dss"
 
@@ -19,16 +20,17 @@ Redirect "Medidores_2022124950_IJAU11_--MBS-1--T--.dss"
 Redirect "CurvaCarga_2022124950_IJAU11_--MBS-1--T--.dss"
 Redirect "CargasBT_DU01_2022124950_IJAU11_--MBS-1--T--.dss"
 Redirect "CargasMT_DU01_2022124950_IJAU11_--MBS-1--T--.dss"
-!Redirect "trf_166467a_pvsyst.dss"
 
 
 New monitor.TOTALvoltage element=line.SMT_1128316 terminal=1 mode=0
 New monitor.TOTALpower element=line.SMT_1128316 terminal=1 mode=1 ppolar=no
 
-New monitor.trf166467a_voltage element=transformer.trf_166467a terminal=1 mode=0
-New monitor.trf166467a_power element=transformer.trf_166467a terminal=1 mode=1 ppolar=no
-
 New energymeter.source element=line.SMT_1128316 terminal=1
+
+!set datapath = "C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\BRR-PVSyst"
+!redirect "vilarubens-pv.dss"
+
+!set datapath = "C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS\IJAU11"
 
 Set mode = daily
 Set Voltagebases = [0.22 0.24 13.8]
@@ -37,11 +39,10 @@ Set tolerance = 0.0001
 Set maxcontroliter = 10
 !Set algorithm = newton
 !Solve mode = direct
-!Solve
+Solve
 
 !Plot monitor object=TOTALvoltage channels=(1 3 5) bases=[7967 7967 7967]
 !Plot monitor object=TOTALpower channels=(1 3 5) 
-
 
 buscoords buscoords.csv
 

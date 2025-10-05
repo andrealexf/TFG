@@ -75,12 +75,15 @@ def norm(b):
 
 def getLoads(transformer):
     defineBranchName(transformer)
+    print(DSSTopology.BranchName)
     global bus1
     global bus2
     loadIpList = []
     loadList = []
+    DSSTopology.ForwardBranch
 
-    while DSSTopology.BranchName != '' and ((DSSTopology.BranchName.split(".", 1)[1]).split("_", 1)[0])[:3] != "smt":  # enquanto line não for smt...
+
+    while DSSTopology.BranchName != '' and DSSTopology.BranchName.split(".")[0] != "Transformer" and ((DSSTopology.BranchName.split(".", 1)[1]).split("_", 1)[0])[:3] != "smt":  # enquanto line não for smt...
 
         bus1 = DSSCktElement.BusNames[0]
         bus2 = DSSCktElement.BusNames[1]
@@ -89,10 +92,11 @@ def getLoads(transformer):
         #voltageBus(bus1)
 
         if busLoads(bus2):
-            print(" ", busLoads(bus2))
+            #print(" ", busLoads(bus2))
             loadIpList.append(busLoads(bus2))
-
+            
             if (busLoads(bus2)[0].split("_", 1)[1])[:2] != "ip":
+                print(" ", busLoads(bus2))
                 loadList.append(busLoads(bus2))
                 load = busLoads(bus2)[0]
                 #voltageBus(bus2, load)
@@ -100,6 +104,9 @@ def getLoads(transformer):
         ramal = DSSTopology.BranchName
         DSSTopology.ForwardBranch
 
+
+    print("Ramal: ",ramal)
+    #apagar
     defineBranchName(ramal)
     #print("")
     # print("Número de cargas no transformador:", alvo, " :", len(loadIpList), loadIpList)
@@ -205,6 +212,17 @@ def overvoltage(tupla):
         if i % 2 == 0 and valor > 1.02:
             print("Valor maior que 1.02")
 
+def verboseSolve(datapath):
+    DSSText.Command = 'set datapath="' + datapath + '"'
+    DSSText.Command = 'set mode=daily'
+    DSSText.Command = 'set number=24'
+    DSSText.Command = 'set DemandInterval=true'
+    DSSText.Command = 'set overloadreport=true'
+    DSSText.Command = 'set voltexceptionreport=true'
+    DSSText.Command = 'set DIVerbose=true'
+    DSSText.Command = 'solve'
+    DSSText.Command = 'closeDI'
+
 def defineBranchName(alvo: str) -> bool:
     ok = DSSTopology.First > 0
     while ok:
@@ -214,6 +232,7 @@ def defineBranchName(alvo: str) -> bool:
         ok = DSSTopology.Next > 0
 
     return False
+
 
 pv_dir = Path('C://Users//Andre//Downloads//TFG//Desenvolvimento-SegundoSemestre//BRR-PVSyst')
 
@@ -247,32 +266,17 @@ for nomeBairro, transformador in bairros.items():
         createGD(loadList)
 
     datapath = str(txtVP)
-    print(datapath)
-    DSSText.Command = 'set datapath="'+datapath+'"'
-    DSSText.Command = 'set mode=daily'
-    DSSText.Command = 'set number=24'
-    DSSText.Command = 'set DemandInterval=true'
-    DSSText.Command = 'set overloadreport=true'
-    DSSText.Command = 'set voltexceptionreport=true'
-    DSSText.Command = 'set DIVerbose=true'
-    DSSText.Command = 'solve'
-    DSSText.Command = 'closeDI'
+    verboseSolve(datapath)
 
     DSSText.Command = 'clear'
     DSSText.Command = 'Compile ' + mydir + '/Master_DU01_2022124950_IJAU11_--MBS-1--T--.dss'
 
+
 '''
-for i in range(len(bairros['avenida'])):
-    alvo = ("transformer.TRF_"+str(bairros['avenida'][i])+"a").lower()
-    loadList = getLoads(alvo)
-    createGD(loadList)        
-
-
 #agora = ['Transformer.trf_1081464a']
-#alvo="Transformer.trf_166488a".lower() #transformador linha 7067 do isolated: trf_1081464a (). trf_166467a linha 26044 (165 cargas)
-#loadList = getLoads(alvo)  # obtem as cargas conectadas a um transformador
+alvo="Transformer.trf_165914a".lower() #transformador linha 7067 do isolated: trf_1081464a (). trf_166467a linha 26044 (165 cargas)
+loadList = getLoads(alvo)  # obtem as cargas conectadas a um transformador
 #createGD(loadList)
-
 
 DSSText.Command = 'set datapath ="C://Users//Andre//Downloads//TFG//Desenvolvimento-SegundoSemestre//Resultados//Verbose//"'
 DSSText.Command = 'set mode=daily'
@@ -292,8 +296,6 @@ print("Branch Name:",DSSTopology.BranchName)
 print("")
 print("Nome da ultima linha: ", DSSTopology.BranchName,'\n', "Bus2: ", bus2,'\n', "Quantidade de cargas conectadas: ", len(busLoads(bus2)), busLoads(bus2))
 '''
-
-
 
 kW_BC = DSSCircuit.TotalPower[0]  # in kW
 kvar_BC = DSSCircuit.TotalPower[1]  # in kVAr
