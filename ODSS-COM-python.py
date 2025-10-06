@@ -262,31 +262,44 @@ pv_dir = Path('C://Users//Andre//Downloads//TFG//Desenvolvimento-SegundoSemestre
 brr = os.path.join(diretorio, "brr.json")
 with open(brr, "r", encoding="utf-8") as f:
     brr = json.load(f)
+
 bairros = {}
 for lista, trafo in brr.items():
 
     listaTrafo = trafo.split(',')
     bairros[lista] = [int(x) for x in listaTrafo]
 
+mult = {
+            0: 1.0,
+            1: 1.2,
+            2: 1.4,
+            3: 1.6,
+            4: 1.8,
+            5: 2.0
+        }
 
-for nomeBairro, transformador in bairros.items():
+for j in range(3):
 
-    txtVP = (Path(r"C:\\Users\\Andre\\Downloads\\TFG\\Desenvolvimento-SegundoSemestre\\Resultados\\Verbose") / nomeBairro).resolve()
+    for nomeBairro, transformador in bairros.items():
 
-    for i in range(len(bairros[nomeBairro])):
+        for i in range(len(bairros[nomeBairro])):
 
-        print(bairros[nomeBairro][i])
-        alvo = ("transformer.TRF_"+str(bairros[nomeBairro][i])+"a").lower()
-        #print(alvo)
-        loadList = getLoads(alvo)
-        createGD(nomeBairro, loadList, limpar=True)
+            print(mult.get(j))
 
+            print(bairros[nomeBairro][i])
+            alvo = ("transformer.TRF_"+str(bairros[nomeBairro][i])+"a").lower()
+            #print(alvo)
+            loadList = getLoads(alvo)
+            createGD(nomeBairro, loadList,mult.get(j), limpar=True)
+
+    txt = "mult" + str(mult.get(j))
+    txtVP = (Path(r"C:\\Users\\Andre\\Downloads\\TFG\\Desenvolvimento-SegundoSemestre\\Resultados\\Verbose") / txt).resolve()
+    print(txtVP)
     datapath = str(txtVP)
     verboseSolve(datapath)
 
     DSSText.Command = 'clear'
     DSSText.Command = 'Compile ' + mydir + '/Master_DU01_2022124950_IJAU11_--MBS-1--T--.dss'
-
 
 '''
 #agora = ['Transformer.trf_1081464a']
