@@ -114,10 +114,30 @@ def getLoads(transformer):
     #print("")
     return loadList
 
-def createGD(loadList: list):
+def createGD(nomeBairro, loadList: list, mult: float = 1, limpar: bool = False):
+
+    txt = nomeBairro + "-mult" + str(mult) + "-pv.dss"
+    # txt = "APAGAR-pv.dss"
+    pvdss = pv_dir / txt
+
+    if not hasattr(createGD, "_limpos"):
+        createGD._limpos = set()
+
+    key = pvdss.resolve()
+
+    if limpar or key not in createGD._limpos:
+        mode = "w"
+        createGD._limpos.add(key)
+
+    else:
+        mode = "a"
+
+    with pvdss.open(mode, encoding="utf-8") as f:
+        f.write("")
 
     PVnumber = 0
     norepeat = {}
+
     for i in range(len(loadList)):
 
         encontrar = ((loadList[i])[0]).split("_")[1]
@@ -138,7 +158,8 @@ def createGD(loadList: list):
                     norepeat[pvname] = norepeat.get(pvname, 0) + 1
                     pvname = pvname if norepeat[pvname] == 1 else f"{pvname}_{norepeat[pvname]}"
 
-                    pot = energia / (24 * 30 * 0.17)
+                    pot = (energia) / (24 * 30 * 0.17)
+                    pot = pot * mult
                     kva = math.ceil(pot)
 
                     DSSCircuit.SetActiveElement("load." + (loadList[i])[0])
@@ -154,6 +175,8 @@ def createGD(loadList: list):
                     #print('~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp'+"\n")
                     #print('')
                     PVnumber += 1
+
+
     print(PVnumber)
 
 def busLoads(bus_base: str):  # cargas conectadas à barra
@@ -248,13 +271,6 @@ for lista, trafo in brr.items():
 
 for nomeBairro, transformador in bairros.items():
 
-    txt = nomeBairro+"-pv.dss"
-    #txt = "APAGAR-pv.dss"
-    pvdss = pv_dir / txt
-
-    with pvdss.open("w", encoding="utf-8") as f:
-        f.write("")
-
     txtVP = (Path(r"C:\\Users\\Andre\\Downloads\\TFG\\Desenvolvimento-SegundoSemestre\\Resultados\\Verbose") / nomeBairro).resolve()
 
     for i in range(len(bairros[nomeBairro])):
@@ -263,7 +279,7 @@ for nomeBairro, transformador in bairros.items():
         alvo = ("transformer.TRF_"+str(bairros[nomeBairro][i])+"a").lower()
         #print(alvo)
         loadList = getLoads(alvo)
-        createGD(loadList)
+        createGD(nomeBairro, loadList, limpar=True)
 
     datapath = str(txtVP)
     verboseSolve(datapath)
