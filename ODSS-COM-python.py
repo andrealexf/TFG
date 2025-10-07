@@ -92,11 +92,11 @@ def getLoads(transformer):
         #voltageBus(bus1)
 
         if busLoads(bus2):
-            #print(" ", busLoads(bus2))
+            print(" ", busLoads(bus2))
             loadIpList.append(busLoads(bus2))
             
             if (busLoads(bus2)[0].split("_", 1)[1])[:2] != "ip":
-                print(" ", busLoads(bus2))
+                #print(" ", busLoads(bus2))
                 loadList.append(busLoads(bus2))
                 load = busLoads(bus2)[0]
                 #voltageBus(bus2, load)
@@ -120,17 +120,7 @@ def createGD(nomeBairro, loadList: list, mult: float = 1, limpar: bool = False):
     # txt = "APAGAR-pv.dss"
     pvdss = pv_dir / txt
 
-    if not hasattr(createGD, "_limpos"):
-        createGD._limpos = set()
-
-    key = pvdss.resolve()
-
-    if limpar or key not in createGD._limpos:
-        mode = "w"
-        createGD._limpos.add(key)
-
-    else:
-        mode = "a"
+    mode = "w" if limpar else "a"
 
     with pvdss.open(mode, encoding="utf-8") as f:
         f.write("")
@@ -246,6 +236,9 @@ def verboseSolve(datapath):
     DSSText.Command = 'solve'
     DSSText.Command = 'closeDI'
 
+    DSSText.Command = 'clear'
+    DSSText.Command = 'Compile ' + mydir + '/Master_DU01_2022124950_IJAU11_--MBS-1--T--.dss'
+
 def defineBranchName(alvo: str) -> bool:
     ok = DSSTopology.First > 0
     while ok:
@@ -278,7 +271,7 @@ mult = {
             5: 2.0
         }
 
-for j in range(3):
+for j in range(6):
 
     for nomeBairro, transformador in bairros.items():
 
@@ -290,7 +283,7 @@ for j in range(3):
             alvo = ("transformer.TRF_"+str(bairros[nomeBairro][i])+"a").lower()
             #print(alvo)
             loadList = getLoads(alvo)
-            createGD(nomeBairro, loadList,mult.get(j), limpar=True)
+            createGD(nomeBairro, loadList,mult.get(j), limpar=(i == 0))
 
     txt = "mult" + str(mult.get(j))
     txtVP = (Path(r"C:\\Users\\Andre\\Downloads\\TFG\\Desenvolvimento-SegundoSemestre\\Resultados\\Verbose") / txt).resolve()
@@ -298,8 +291,6 @@ for j in range(3):
     datapath = str(txtVP)
     verboseSolve(datapath)
 
-    DSSText.Command = 'clear'
-    DSSText.Command = 'Compile ' + mydir + '/Master_DU01_2022124950_IJAU11_--MBS-1--T--.dss'
 
 '''
 #agora = ['Transformer.trf_1081464a']
