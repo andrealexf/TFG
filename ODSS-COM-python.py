@@ -13,8 +13,20 @@ import matplotlib as mpl
 import math
 import pandas as pd
 import os
+import re
+from dataclasses import dataclass
+from itertools import chain
 import json
 import DSSStartup as dsss
+
+@dataclass(frozen=True)
+class cargaBT:
+    load: str
+    kw: float
+    daily: str
+    def getLoad(self): return self.load
+    def getKw(self): return self.kw
+    def getDaily(self): return self.daily
 
 os.chdir('C://Users//Andre//Downloads//TFG//Desenvolvimento-SegundoSemestre//QGIS-OPENDSS//IJAU11')
 mydir = os.getcwd()
@@ -61,13 +73,14 @@ DSSText.Command = 'Redirect ' + mydir + '/BRR_VILAISABEL.dss'
 #DSSSolution.Solve()
 
 nome_arquivo = "ramal.txt"
-
 diretorio = os.path.dirname(os.path.abspath(__file__))
 arquivo = os.path.join(diretorio, nome_arquivo)
 
-with open(arquivo, "r", encoding="utf-8") as f:
-    conteudo = f.readlines()
+nome_arquivo = "ramal.txt"
+diretorio = os.path.dirname(os.path.abspath(__file__))
+arquivo = os.path.join(diretorio, nome_arquivo)
 
+arquivoBT = r"C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS\IJAU11\CargasBT_DU01_2022124950_IJAU11_--MBS-1--T--.dss"
 
 # --------------------------------------
 def norm(b):
@@ -93,24 +106,22 @@ def getLoads(transformer):
 
         if busLoads(bus2):
             print(" ", busLoads(bus2))
-            loadIpList.append(busLoads(bus2))
-            
+            #loadIpList.append(busLoads(bus2))
+
             if (busLoads(bus2)[0].split("_", 1)[1])[:2] != "ip":
                 #print(" ", busLoads(bus2))
                 loadList.append(busLoads(bus2))
-                load = busLoads(bus2)[0]
+                #load = busLoads(bus2)[0]
                 #voltageBus(bus2, load)
 
         ramal = DSSTopology.BranchName
         DSSTopology.ForwardBranch
 
-
-    print("Ramal: ",ramal)
-    #apagar
+    loadList = list(chain.from_iterable(loadList))
     defineBranchName(ramal)
-    #print("")
+    print("")
     # print("Número de cargas no transformador:", alvo, " :", len(loadIpList), loadIpList)
-    #print("Número de cargas no transformador (excluindo iluminação):", len(loadList), loadList)
+    print("Número de cargas no transformador (excluindo iluminação):", len(loadList), loadList)
     #print("")
     return loadList
 
@@ -204,6 +215,32 @@ def voltageBus(bus1, load=None):
         #print("(p.u., ang): ", pu_round)
         #overvoltage(pu_round)
 
+def findLoad(load: str) -> list[cargaBT] | None: #obtem kw e o tipo de curva da carga
+
+    findLoadList = []
+    padrao = re.compile(
+        r'Load.\s*([^"]+)'
+        r'.*?kw\s*=\s*([^ ]+)'
+        r'.*?daily\s*=\s*"([^"]*)"'
+        , re.IGNORECASE)
+
+    with open(arquivoBT, "r", encoding="utf-8") as f:
+
+        for linha in f:
+            m = padrao.search(linha)
+
+            if not m:
+                continue
+
+            loadencontrada, kw, daily = m.group(1), m.group(2), m.group(3).strip()
+
+            if loadencontrada == load:
+
+                findLoadList.append(cargaBT(load = loadencontrada, kw = kw, daily = daily))
+                return findLoadList
+
+    return None
+
 def phasesNumber(bus: str) -> str:
     phases = bus.count(".")
 
@@ -263,15 +300,14 @@ for lista, trafo in brr.items():
     bairros[lista] = [int(x) for x in listaTrafo]
 
 mult = {
-            0: 1.0,
-            1: 1.2,
-            2: 1.4,
-            3: 1.6,
-            4: 1.8,
-            5: 2.0
+            0: 1.1,
+            1: 1.3,
+            2: 1.5,
+            3: 1.7,
+            4: 1.9
         }
 
-for j in range(6):
+for j in range(1):
 
     for nomeBairro, transformador in bairros.items():
 
@@ -283,13 +319,13 @@ for j in range(6):
             alvo = ("transformer.TRF_"+str(bairros[nomeBairro][i])+"a").lower()
             #print(alvo)
             loadList = getLoads(alvo)
-            createGD(nomeBairro, loadList,mult.get(j), limpar=(i == 0))
+            #createGD(nomeBairro, loadList,mult.get(j), limpar=(i == 0))
 
     txt = "mult" + str(mult.get(j))
     txtVP = (Path(r"C:\\Users\\Andre\\Downloads\\TFG\\Desenvolvimento-SegundoSemestre\\Resultados\\Verbose") / txt).resolve()
     print(txtVP)
     datapath = str(txtVP)
-    verboseSolve(datapath)
+    #verboseSolve(datapath)
 
 
 '''
