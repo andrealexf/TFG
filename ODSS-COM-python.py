@@ -8,12 +8,9 @@
 
 from pathlib import Path
 import math
-import numpy as np
-import matplotlib as mpl
-import math
-import pandas as pd
 import os
 import re
+import ast
 from dataclasses import dataclass
 from itertools import chain
 import json
@@ -76,11 +73,8 @@ nome_arquivo = "ramal.txt"
 diretorio = os.path.dirname(os.path.abspath(__file__))
 arquivo = os.path.join(diretorio, nome_arquivo)
 
-nome_arquivo = "ramal.txt"
-diretorio = os.path.dirname(os.path.abspath(__file__))
-arquivo = os.path.join(diretorio, nome_arquivo)
-
 arquivoBT = r"C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS\IJAU11\CargasBT_DU01_2022124950_IJAU11_--MBS-1--T--.dss"
+arquivoLS = r"C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS\IJAU11\CurvaCarga_2022124950_IJAU11_--MBS-1--T--.dss"
 
 # --------------------------------------
 def norm(b):
@@ -91,7 +85,7 @@ def getLoads(transformer):
     print(DSSTopology.BranchName)
     global bus1
     global bus2
-    loadIpList = []
+    #loadIpList = []
     loadList = []
     DSSTopology.ForwardBranch
 
@@ -125,6 +119,7 @@ def getLoads(transformer):
     #print("")
     return loadList
 
+'''
 def createGD(nomeBairro, loadList: list, mult: float = 1, limpar: bool = False):
 
     txt = nomeBairro + "-mult" + str(mult) + "-pv.dss"
@@ -179,6 +174,66 @@ def createGD(nomeBairro, loadList: list, mult: float = 1, limpar: bool = False):
 
 
     print(PVnumber)
+'''
+
+def createGD2(nomeBairro, loadList: list[cargaBT], mult: float = 1, limpar: bool = False):
+
+    txt = nomeBairro + "-mult" + str(mult) + "-pv.dss"
+    # txt = "APAGAR-pv.dss"
+    pvdss = pv_dir / txt
+
+    mode = "w" if limpar else "a"
+
+    with pvdss.open(mode, encoding="utf-8") as f:
+        f.write("")
+
+    PVnumber = 0
+
+    for cargas in loadList:
+
+        pot = float(cargas.getKw()) * mult
+
+        pvname = cargas.getLoad()
+        ene = loadShapeSum(pot , cargas.getDaily())
+        kva = math.ceil(ene)
+
+        DSSCircuit.SetActiveElement("load." + (cargas.getLoad()))
+        bus = str(DSSCktElement.BusNames).strip("(',')")
+        pn = phasesNumber(bus)
+
+        txt = 'New "PVsystem.GD.' + pvname + '" phases=' + pn + ' bus1=' + bus + ' conn=Delta kv=0.22 pf=0.92 pmpp=' + str(ene) + ' kva=' + str(kva) + ' irradiance=0.98' + '\n' + '~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp' + '\n' + '\n'
+
+        with pvdss.open("a", encoding="utf-8") as f:
+            f.write(txt)
+
+        PVnumber += 1
+
+    print(PVnumber)
+
+def loadShapeSum(pot: float, tipo: str) -> float:
+
+    padrao = re.compile(
+        r'Loadshape.\s*([^"]+)'
+        r'.*?mult\s*=(.*)$'
+        , re.IGNORECASE)
+
+    ene = 0
+
+    with open(arquivoLS, "r", encoding="utf-8") as f:
+
+        for linha in f:
+            m = padrao.search(linha)
+
+            if not m:
+                continue
+
+            tipencontrada, curva = m.group(1), m.group(2).strip()
+
+            if tipencontrada == tipo:
+                loadshapeTuple = ast.literal_eval(curva)
+                ene = pot * sum(loadshapeTuple)
+
+    return ene
 
 def busLoads(bus_base: str):  # cargas conectadas à barra
     alvo = norm(bus_base)
@@ -215,9 +270,9 @@ def voltageBus(bus1, load=None):
         #print("(p.u., ang): ", pu_round)
         #overvoltage(pu_round)
 
-def findLoad(load: str) -> list[cargaBT] | None: #obtem kw e o tipo de curva da carga
+def findLoad(loadlist: list) -> list[cargaBT]: #obtem kw e o tipo de curva da carga
 
-    findLoadList = []
+    cargasBTList = []
     padrao = re.compile(
         r'Load.\s*([^"]+)'
         r'.*?kw\s*=\s*([^ ]+)'
@@ -234,12 +289,12 @@ def findLoad(load: str) -> list[cargaBT] | None: #obtem kw e o tipo de curva da 
 
             loadencontrada, kw, daily = m.group(1), m.group(2), m.group(3).strip()
 
-            if loadencontrada == load:
+            for load in loadList:
+                if loadencontrada == load.upper():
 
-                findLoadList.append(cargaBT(load = loadencontrada, kw = kw, daily = daily))
-                return findLoadList
+                    cargasBTList.append(cargaBT(load = loadencontrada, kw = kw, daily = daily))
 
-    return None
+    return cargasBTList
 
 def phasesNumber(bus: str) -> str:
     phases = bus.count(".")
@@ -307,23 +362,23 @@ mult = {
             4: 1.9
         }
 
-for j in range(1):
+for j in range(2):
+    cargasBTList = []
 
     for nomeBairro, transformador in bairros.items():
 
         for i in range(len(bairros[nomeBairro])):
 
-            print(mult.get(j))
-
             print(bairros[nomeBairro][i])
             alvo = ("transformer.TRF_"+str(bairros[nomeBairro][i])+"a").lower()
             #print(alvo)
             loadList = getLoads(alvo)
-            #createGD(nomeBairro, loadList,mult.get(j), limpar=(i == 0))
+            cargasBTList = findLoad(loadList)
+            createGD2(nomeBairro, cargasBTList,mult.get(j), limpar=(i == 0))
 
     txt = "mult" + str(mult.get(j))
     txtVP = (Path(r"C:\\Users\\Andre\\Downloads\\TFG\\Desenvolvimento-SegundoSemestre\\Resultados\\Verbose") / txt).resolve()
-    print(txtVP)
+    #print(txtVP)
     datapath = str(txtVP)
     #verboseSolve(datapath)
 
