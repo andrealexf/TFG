@@ -1,0 +1,63 @@
+
+arearural
+     - pmpptotal1 = 83.83 número de unidades = 86
+     - pmpptotal2 = 78.02 número de unidades = 43
+
+avenida
+     - pmpptotal1 = 1103.25 número de unidades = 1436
+     - pmpptotal2 = 1097.48 número de unidades = 772
+
+boavista
+     - pmpptotal1 = 1133.79 número de unidades = 1174
+     - pmpptotal2 = 1104.61 número de unidades = 629
+
+bps
+     - pmpptotal1 = 198.14 número de unidades = 278
+     - pmpptotal2 = 252.70 número de unidades = 143
+
+centro
+     - pmpptotal1 = 1961.09 número de unidades = 1586
+     - pmpptotal2 = 1897.20 número de unidades = 829
+
+chacaradasmocas
+     - pmpptotal1 = 120.21 número de unidades = 60
+     - pmpptotal2 = 109.10 número de unidades = 31
+
+cruzeiro
+     - pmpptotal1 = 16.51 número de unidades = 8
+     - pmpptotal2 = 60.52 número de unidades = 9
+
+jardimamerica
+     - pmpptotal1 = 49.07 número de unidades = 36
+     - pmpptotal2 = 208.32 número de unidades = 147
+
+morrochic
+     - pmpptotal1 = 2361.21 número de unidades = 2438
+     - pmpptotal2 = 2256.39 número de unidades = 1269
+
+pinheirinho
+     - pmpptotal1 = 2632.12 número de unidades = 2228
+     - pmpptotal2 = 10739.05 número de unidades = 2228
+
+santarosa
+     - pmpptotal1 = 27.83 número de unidades = 26
+     - pmpptotal2 = 28.93 número de unidades = 13
+
+varginha
+     - pmpptotal1 = 129.60 número de unidades = 166
+     - pmpptotal2 = 134.41 número de unidades = 91
+
+vilaisabel
+     - pmpptotal1 = 785.12 número de unidades = 1254
+     - pmpptotal2 = 766.45 número de unidades = 690
+
+vilapoddis
+     - pmpptotal1 = 35.37 número de unidades = 66
+     - pmpptotal2 = 34.27 número de unidades = 35
+
+vilarubens
+     - pmpptotal1 = 684.04 número de unidades = 710
+     - pmpptotal2 = 674.73 número de unidades = 384
+
+pmppptotaltotal1 = 11321.17937985872
+pmppptotaltotal2 = 19442.18470117193

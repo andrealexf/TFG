@@ -195,13 +195,14 @@ def createGD2(nomeBairro, loadList: list[cargaBT], mult: float = 1, limpar: bool
 
         pvname = cargas.getLoad()
         ene = loadShapeSum(pot , cargas.getDaily())
+        pot = ene / (0.17*24)
         kva = math.ceil(ene)
 
         DSSCircuit.SetActiveElement("load." + (cargas.getLoad()))
         bus = str(DSSCktElement.BusNames).strip("(',')")
         pn = phasesNumber(bus)
 
-        txt = 'New "PVsystem.GD.' + pvname + '" phases=' + pn + ' bus1=' + bus + ' conn=Delta kv=0.22 pf=0.92 pmpp=' + str(ene) + ' kva=' + str(kva) + ' irradiance=0.98' + '\n' + '~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp' + '\n' + '\n'
+        txt = 'New "PVsystem.GD.' + pvname + '" phases=' + pn + ' bus1=' + bus + ' conn=Delta kv=0.22 pf=0.92 pmpp=' + str(pot) + ' kva=' + str(kva) + ' irradiance=0.98' + '\n' + '~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp' + '\n' + '\n'
 
         with pvdss.open("a", encoding="utf-8") as f:
             f.write(txt)
@@ -355,14 +356,15 @@ for lista, trafo in brr.items():
     bairros[lista] = [int(x) for x in listaTrafo]
 
 mult = {
-            0: 1.1,
-            1: 1.3,
-            2: 1.5,
-            3: 1.7,
-            4: 1.9
+            0: 1.2,
+            1: 1.4,
+            2: 1.6,
+            3: 1.8,
+            4: 1.8,
+            5: 2.0
         }
 
-for j in range(2):
+for j in range(4):
     cargasBTList = []
 
     for nomeBairro, transformador in bairros.items():
