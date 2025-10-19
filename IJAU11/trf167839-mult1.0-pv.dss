@@ -1,0 +1,258 @@
+New "PVsystem.GD.BT_3998960_M1" phases=3 bus1=1003998960.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.3897575246878409 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_3998960_M2" phases=3 bus1=1003998960.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.3897575246878409 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049937_M1" phases=3 bus1=1001049937.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.7817613236417157 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049937_M2" phases=3 bus1=1001049937.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.7817613236417157 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_3885504_M1" phases=3 bus1=1003885504.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.3401399930068272 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_3885504_M2" phases=3 bus1=1003885504.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.3401399930068272 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050000_M1" phases=3 bus1=1001050000.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.0864693031416501 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050000_M2" phases=3 bus1=1001050000.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.0864693031416501 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050014_M1" phases=3 bus1=1001050014.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.49860041162766716 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050014_M2" phases=3 bus1=1001050014.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.49860041162766716 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_4892503_M1" phases=1 bus1=1004892503.1.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.3310048027302472 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_4892503_M2" phases=1 bus1=1004892503.1.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.3310048027302472 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_11382069_M1" phases=1 bus1=1011382069.1.2.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.08800763222448565 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_11382069_M2" phases=1 bus1=1011382069.1.2.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.08800763222448565 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050056_M1" phases=3 bus1=1001050056.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.111360258735695 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050056_M2" phases=3 bus1=1001050056.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.111360258735695 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049993_M1" phases=3 bus1=1001049993.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.6406425323641456 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049993_M2" phases=3 bus1=1001049993.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.6406425323641456 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050070_M1" phases=3 bus1=1001050070.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.7857339383731237 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050070_M2" phases=3 bus1=1001050070.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.7857339383731237 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049958_M1" phases=1 bus1=1001049958.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.2527377988937265 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049958_M2" phases=1 bus1=1001049958.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.2527377988937265 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050084_M1" phases=3 bus1=1001050084.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.6820218996171727 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050084_M2" phases=3 bus1=1001050084.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.6820218996171727 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049909_M1" phases=3 bus1=1001049909.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.7163735402528492 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049909_M2" phases=3 bus1=1001049909.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.7163735402528492 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050049_M1" phases=3 bus1=1001050049.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.7312556144514117 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050049_M2" phases=3 bus1=1001050049.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.7312556144514117 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_4301661_M1" phases=3 bus1=1004301661.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.943989718956211 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_4301661_M2" phases=3 bus1=1004301661.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.943989718956211 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050007_M1" phases=3 bus1=1001050007.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.0932397509825489 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050007_M2" phases=3 bus1=1001050007.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.0932397509825489 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_4496954_M1" phases=3 bus1=1004496954.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.3733346886544215 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_4496954_M2" phases=3 bus1=1004496954.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.3733346886544215 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050021_M1" phases=3 bus1=1001050021.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.0866087552175758 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050021_M2" phases=3 bus1=1001050021.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.0866087552175758 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049972_M1" phases=3 bus1=1001049972.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.5075647131795294 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049972_M2" phases=3 bus1=1001049972.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.5075647131795294 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050091_M1" phases=1 bus1=1001050091.3.1.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.32298377112885285 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050091_M2" phases=1 bus1=1001050091.3.1.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.32298377112885285 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049979_M1" phases=3 bus1=1001049979.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.5059997547973136 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049979_M2" phases=3 bus1=1001049979.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.5059997547973136 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050035_M1" phases=3 bus1=1001050035.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.08250558898794608 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050035_M2" phases=3 bus1=1001050035.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.08250558898794608 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050126_M1" phases=1 bus1=1001050126.3.1.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.6017830349772639 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050126_M2" phases=1 bus1=1001050126.3.1.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.6017830349772639 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050042_M1" phases=3 bus1=1001050042.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=4.743658336644991 kva=5 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050042_M2" phases=3 bus1=1001050042.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=4.743658336644991 kva=5 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049986_M1" phases=3 bus1=1001049986.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.7584544896476955 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049986_M2" phases=3 bus1=1001049986.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.7584544896476955 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049916_M1" phases=3 bus1=1001049916.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.8028501068561212 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049916_M2" phases=3 bus1=1001049916.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.8028501068561212 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_10406755_M1" phases=1 bus1=1010406755.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.6500367554809762 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_10406755_M2" phases=1 bus1=1010406755.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.6500367554809762 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050063_M1" phases=3 bus1=1001050063.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.4742733309636475 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050063_M2" phases=3 bus1=1001050063.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.4742733309636475 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_10214815_M1" phases=1 bus1=1010214815.1.2.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.7015683878238393 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_10214815_M2" phases=1 bus1=1010214815.1.2.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.7015683878238393 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050133_M1" phases=3 bus1=1001050133.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.0446234166628603 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050133_M2" phases=3 bus1=1001050133.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.0446234166628603 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050077_M1" phases=3 bus1=1001050077.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.7286117554785514 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050077_M2" phases=3 bus1=1001050077.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.7286117554785514 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049951_M1" phases=3 bus1=1001049951.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.4131072262359914 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049951_M2" phases=3 bus1=1001049951.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.4131072262359914 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049965_M1" phases=3 bus1=1001049965.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.3002371334044815 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049965_M2" phases=3 bus1=1001049965.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.3002371334044815 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050028_M1" phases=3 bus1=1001050028.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.5468121033653701 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050028_M2" phases=3 bus1=1001050028.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.5468121033653701 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_11266978_M1" phases=1 bus1=1011266978.1.2.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.060574277319224004 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_11266978_M2" phases=1 bus1=1011266978.1.2.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.060574277319224004 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050105_M1" phases=3 bus1=1001050105.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.6743882016981335 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050105_M2" phases=3 bus1=1001050105.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.6743882016981335 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_4127207_M1" phases=3 bus1=1004127207.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.8943976661979671 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_4127207_M2" phases=3 bus1=1004127207.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.8943976661979671 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049930_M1" phases=1 bus1=1001049930.1.2.4 conn=Delta kv=0.22 pf=0.92 pmpp=2.4978046665414495 kva=3 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049930_M2" phases=1 bus1=1001049930.1.2.4 conn=Delta kv=0.22 pf=0.92 pmpp=2.4978046665414495 kva=3 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050112_M1" phases=3 bus1=1001050112.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=3.6258203449088047 kva=4 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050112_M2" phases=3 bus1=1001050112.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=3.6258203449088047 kva=4 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050098_M1" phases=3 bus1=1001050098.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.7386962186050305 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1050098_M2" phases=3 bus1=1001050098.1.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.7386962186050305 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049902_M1" phases=1 bus1=1001049902.1.2.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.5015282919962794 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049902_M2" phases=1 bus1=1001049902.1.2.4 conn=Delta kv=0.22 pf=0.92 pmpp=1.5015282919962794 kva=2 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049923_M1" phases=1 bus1=1001049923.3.1.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.9252594316540722 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_1049923_M2" phases=1 bus1=1001049923.3.1.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.9252594316540722 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_3640476_M1" phases=1 bus1=1003640476.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.8767044514962995 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+
+New "PVsystem.GD.BT_3640476_M2" phases=1 bus1=1003640476.2.3.4 conn=Delta kv=0.22 pf=0.92 pmpp=0.8767044514962995 kva=1 irradiance=0.98
+~ temperature=25 %cutin=0.1 %cutout=0.1 effcurve=Myeff P-TCurve=MyPvsT Daily=PVIrrad_diaria TDaily=MyTemp
+

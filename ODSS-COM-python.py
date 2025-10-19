@@ -15,6 +15,7 @@ from dataclasses import dataclass
 from itertools import chain
 import json
 import DSSStartup as dsss
+#MUDAR: OS CHDIR, ARQUIVOBT, ALVO
 
 @dataclass(frozen=True)
 class cargaBT:
@@ -26,6 +27,7 @@ class cargaBT:
     def getDaily(self): return self.daily
 
 os.chdir('C://Users//Andre//Downloads//TFG//Desenvolvimento-SegundoSemestre//QGIS-OPENDSS//IJAU11')
+#os.chdir('C://Users//Andre//Downloads//TFG//Desenvolvimento-SegundoSemestre//QGIS-OPENDSS')
 mydir = os.getcwd()
 print(mydir)
 
@@ -49,31 +51,15 @@ DSSObj.AllowForms = 0
 
 DSSText.Command = 'clear'
 DSSText.Command = 'Compile ' + mydir + '/Master_DU01_2022124950_IJAU11_--MBS-1--T--.dss'
+#DSSText.Command = 'Compile ' + mydir + '/circuitoexemplo.dss'
 
-'''
-DSSText.Command = 'Redirect ' + mydir + '/BRR_AREARURAL.dss'
-DSSText.Command = 'Redirect ' + mydir + '/BRR_AVENIDA.dss'
-DSSText.Command = 'Redirect ' + mydir + '/BRR_BOAVISTA.dss'
-DSSText.Command = 'Redirect ' + mydir + '/BRR_BPS.dss'
-DSSText.Command = 'Redirect ' + mydir + '/BRR_CENTRO.dss'
-DSSText.Command = 'Redirect ' + mydir + '/BRR_CRUZEIRO.dss'
-DSSText.Command = 'Redirect ' + mydir + '/BRR_ESTIVA.dss'
-DSSText.Command = 'Redirect ' + mydir + '/BRR_MORROCHIC.dss'
-DSSText.Command = 'Redirect ' + mydir + '/BRR_NOSSASENHORADAAGONIA.dss'
-DSSText.Command = 'Redirect ' + mydir + '/BRR_PINHEIRINHO.dss'
-DSSText.Command = 'Redirect ' + mydir + '/BRR_SANTOANTONIO.dss'
-DSSText.Command = 'Redirect ' + mydir + '/BRR_SAOVICENTE.dss'
-DSSText.Command = 'Redirect ' + mydir + '/BRR_UNIFEI.dss'
-DSSText.Command = 'Redirect ' + mydir + '/BRR_VILAISABEL.dss'
-'''
-
-#DSSSolution.Solve()
 
 nome_arquivo = "ramal.txt"
 diretorio = os.path.dirname(os.path.abspath(__file__))
 arquivo = os.path.join(diretorio, nome_arquivo)
 
 arquivoBT = r"C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS\IJAU11\CargasBT_DU01_2022124950_IJAU11_--MBS-1--T--.dss"
+#arquivoBT = r"C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS\circuitoexemplo.dss" #circuito exemplo
 arquivoLS = r"C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS\IJAU11\CurvaCarga_2022124950_IJAU11_--MBS-1--T--.dss"
 
 # --------------------------------------
@@ -89,14 +75,14 @@ def getLoads(transformer):
     loadList = []
     DSSTopology.ForwardBranch
 
-
     while DSSTopology.BranchName != '' and DSSTopology.BranchName.split(".")[0] != "Transformer" and ((DSSTopology.BranchName.split(".", 1)[1]).split("_", 1)[0])[:3] != "smt":  # enquanto line não for smt...
 
         bus1 = DSSCktElement.BusNames[0]
         bus2 = DSSCktElement.BusNames[1]
         print("")
         print(DSSTopology.BranchName)
-        #voltageBus(bus1)
+        voltageBus(bus1)
+        voltageBus(bus2)
 
         if busLoads(bus2):
             print(" ", busLoads(bus2))
@@ -105,8 +91,9 @@ def getLoads(transformer):
             if (busLoads(bus2)[0].split("_", 1)[1])[:2] != "ip":
                 #print(" ", busLoads(bus2))
                 loadList.append(busLoads(bus2))
-                #load = busLoads(bus2)[0]
-                #voltageBus(bus2, load)
+
+                load = busLoads(bus2)[0]
+                voltageBus(bus2, load)
 
         ramal = DSSTopology.BranchName
         DSSTopology.ForwardBranch
@@ -176,7 +163,7 @@ def createGD(nomeBairro, loadList: list, mult: float = 1, limpar: bool = False):
     print(PVnumber)
 '''
 
-def createGD2(nomeBairro, loadList: list[cargaBT], mult: float = 1, limpar: bool = False):
+def createGD2(nomeBairro, loadList: list[cargaBT], mult: float = 1.0, limpar: bool = False):
 
     txt = nomeBairro + "-mult" + str(mult) + "-pv.dss"
     # txt = "APAGAR-pv.dss"
@@ -196,7 +183,7 @@ def createGD2(nomeBairro, loadList: list[cargaBT], mult: float = 1, limpar: bool
         pvname = cargas.getLoad()
         ene = loadShapeSum(pot , cargas.getDaily())
         pot = ene / (0.17*24)
-        kva = math.ceil(ene)
+        kva = math.ceil(pot)
 
         DSSCircuit.SetActiveElement("load." + (cargas.getLoad()))
         bus = str(DSSCktElement.BusNames).strip("(',')")
@@ -209,7 +196,7 @@ def createGD2(nomeBairro, loadList: list[cargaBT], mult: float = 1, limpar: bool
 
         PVnumber += 1
 
-    print(PVnumber)
+    print("Número de painéis fotovoltaicos adicionados: ",PVnumber)
 
 def loadShapeSum(pot: float, tipo: str) -> float:
 
@@ -256,19 +243,19 @@ def voltageBus(bus1, load=None):
     if load is not None:  # para cargas
 
         DSSCircuit.SetActiveElement("Load." + load)
-        #print("     Carga: ",DSSCircuit.ActiveCktElement.Name)
+        print("     Carga: ",DSSCircuit.ActiveCktElement.Name)
         pu = DSSCircuit.ActiveBus.puVmagAngle
         pu_round = tupleFormat(pu, casas=4)
-        #print("     (p.u., ang): ", pu_round)
+        print("     (p.u., ang): ", pu_round)
         #overvoltage(pu_round)
 
     else: #linhas e transformadores
 
         DSSCircuit.SetActiveBus(bus1)
-        #print("Linha: ", DSSCircuit.ActiveCktElement.Name)
+        print("Linha: ", DSSCircuit.ActiveCktElement.Name)
         pu = DSSCircuit.ActiveBus.puVmagAngle
         pu_round = tupleFormat(pu, casas=4)
-        #print("(p.u., ang): ", pu_round)
+        print("(p.u., ang): ", pu_round)
         #overvoltage(pu_round)
 
 def findLoad(loadlist: list) -> list[cargaBT]: #obtem kw e o tipo de curva da carga
@@ -291,7 +278,7 @@ def findLoad(loadlist: list) -> list[cargaBT]: #obtem kw e o tipo de curva da ca
             loadencontrada, kw, daily = m.group(1), m.group(2), m.group(3).strip()
 
             for load in loadList:
-                if loadencontrada == load.upper():
+                if loadencontrada.upper() == load.upper():
 
                     cargasBTList.append(cargaBT(load = loadencontrada, kw = kw, daily = daily))
 
@@ -342,6 +329,14 @@ def defineBranchName(alvo: str) -> bool:
 
     return False
 
+def solvetrf(alvo, mult):
+
+    txt = '/trf167839-mult' + str(mult) + '-pv.dss'
+
+    DSSText.Command = 'Compile ' + mydir + txt
+    DSSText.Command = 'set mode=snapshot'
+    DSSText.Command = 'solve'
+    getLoads(alvo)
 
 pv_dir = Path('C://Users//Andre//Downloads//TFG//Desenvolvimento-SegundoSemestre//BRR-PVSyst')
 
@@ -356,21 +351,27 @@ for lista, trafo in brr.items():
     bairros[lista] = [int(x) for x in listaTrafo]
 
 mult = {
-            0: 1.2,
-            1: 1.4,
-            2: 1.6,
-            3: 1.8,
+            0: 1.0,
+            1: 1.2,
+            2: 1.4,
+            3: 1.6,
             4: 1.8,
             5: 2.0
         }
 
-for j in range(4):
+mult2 = {
+            0: 1.0,
+            1: 1.5,
+            2: 2.0
+        }
+'''
+for j in range(1):
     cargasBTList = []
 
     for nomeBairro, transformador in bairros.items():
 
         for i in range(len(bairros[nomeBairro])):
-
+        
             print(bairros[nomeBairro][i])
             alvo = ("transformer.TRF_"+str(bairros[nomeBairro][i])+"a").lower()
             #print(alvo)
@@ -383,13 +384,25 @@ for j in range(4):
     #print(txtVP)
     datapath = str(txtVP)
     #verboseSolve(datapath)
+'''
 
+
+
+alvo="Transformer.trf_167839a".lower() #transformador linha 7067 do isolated: trf_1081464a (). trf_166467a linha 26044 (165 cargas)
+#loadList = getLoads(alvo)
+#loadList = ['bt_11266978_m1', 'bt_11266978_m2', 'bt_1050133_m1', 'bt_1050133_m2', 'bt_1050126_m1', 'bt_1050126_m2', 'bt_1050112_m1', 'bt_1050112_m2', 'bt_10406755_m1', 'bt_10406755_m2', 'bt_1050105_m1', 'bt_1050105_m2', 'bt_1050098_m1', 'bt_1050098_m2', 'bt_1050091_m1', 'bt_1050091_m2', 'bt_1050077_m1', 'bt_1050077_m2', 'bt_4892503_m1', 'bt_4892503_m2', 'bt_1050070_m1', 'bt_1050070_m2', 'bt_1050056_m1', 'bt_1050056_m2', 'bt_1050049_m1', 'bt_1050049_m2', 'bt_1050063_m1', 'bt_1050063_m2', 'bt_3640476_m1', 'bt_3640476_m2', 'bt_1050084_m1', 'bt_1050084_m2', 'bt_3885504_m1', 'bt_3885504_m2', 'bt_1050042_m1', 'bt_1050042_m2', 'bt_1050035_m1', 'bt_1050035_m2', 'bt_1050028_m1', 'bt_1050028_m2', 'bt_1050021_m1', 'bt_1050021_m2', 'bt_1050014_m1', 'bt_1050014_m2', 'bt_1050007_m1', 'bt_1050007_m2', 'bt_1050000_m1', 'bt_1050000_m2', 'bt_4301661_m1', 'bt_4301661_m2', 'bt_4127207_m1', 'bt_4127207_m2', 'bt_1049993_m1', 'bt_1049993_m2', 'bt_1049986_m1', 'bt_1049986_m2', 'bt_1049979_m1', 'bt_1049979_m2', 'bt_1049972_m1', 'bt_1049972_m2', 'bt_11382069_m1', 'bt_11382069_m2', 'bt_10214815_m1', 'bt_10214815_m2', 'bt_1049965_m1', 'bt_1049965_m2', 'bt_1049958_m1', 'bt_1049958_m2', 'bt_1049951_m1', 'bt_1049951_m2', 'bt_1049937_m1', 'bt_1049937_m2', 'bt_1049930_m1', 'bt_1049930_m2', 'bt_1049923_m1', 'bt_1049923_m2', 'bt_1049916_m1', 'bt_1049916_m2', 'bt_4496954_m1', 'bt_4496954_m2', 'bt_3998960_m1', 'bt_3998960_m2', 'bt_1049909_m1', 'bt_1049909_m2', 'bt_1049902_m1', 'bt_1049902_m2']
+#cargasBTList = findLoad(loadList)
+#createGD2("trf167839", cargasBTList,2,limpar=True)#REFAZER PARA O TRANSFORMADOR DO EXEMPLO
+
+for i in range(3):
+    solvetrf(alvo, mult2.get(i))
+    #print(mult2.get(i))
 
 '''
-#agora = ['Transformer.trf_1081464a']
-alvo="Transformer.trf_165914a".lower() #transformador linha 7067 do isolated: trf_1081464a (). trf_166467a linha 26044 (165 cargas)
-loadList = getLoads(alvo)  # obtem as cargas conectadas a um transformador
-#createGD(loadList)
+DSSText.Command = 'Compile ' + mydir + '/trf167839-mult2-pv.dss'
+DSSText.Command = 'set mode=snapshot'
+DSSText.Command = 'solve'
+loadListAPAGAR = getLoads(alvo)
 
 DSSText.Command = 'set datapath ="C://Users//Andre//Downloads//TFG//Desenvolvimento-SegundoSemestre//Resultados//Verbose//"'
 DSSText.Command = 'set mode=daily'

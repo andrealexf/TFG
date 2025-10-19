@@ -1,0 +1,36 @@
+Clear
+Set DefaultBaseFrequency=60 
+
+New "Circuit.EXEMPLO" basekv=13.8 pu=1.0 bus1="01" r1=0.0 x1=0.0001
+
+New "Linecode.CAB103_3_3_3" nphases=3 basefreq=60 r1=1.0145 x1=0.6284 units=km normamps=261.30
+New "Linecode.BT810_BT810_4_3_4_4" nphases=4 basefreq=60 r1=1.0429 x1=0.0698 units=km normamps=143.00
+New "Linecode.CABBTG01_4_1_1" nphases=1 basefreq=60 r1=3.7006 x1=0.0820 
+New "Linecode.CABBTG01_4_1_2" nphases=2 basefreq=60 r1=3.7006 x1=0.0820 
+New "Loadshape.RES1_12_DU" 24 1 mult=(0.443987834, 0.396693831, 0.381741775, 0.371177823, 1.0, 0.172668385, 0.150588563, 0.110143716, 0.262589678, 0.348796174, 0.372710176, 0.376773235, 0.144993151, 0.286550115, 0.428733951, 0.568758561, 0.265398992, 0.279422349, 0.309906898, 0.418123563, 0.402916115, 0.266931346, 0.127254998, 0.164581826)
+
+New "Line.SMT_ST" phases=3 bus1="01.1.2.3" bus2="trafo.1.2.3" linecode="CAB103_3_3_3"
+
+New "Transformer.Transformador" phases=3 windings=2 buses=["trafo.1.2.3" "barra1.1.2.3.4"] conns=[Delta Wye] kvs=[13.8 0.22] %loadloss=1.522222 %noloadloss=0.377778
+!New "Reactor.Transformador_R" phases=1 bus1="barra1.1.2.3.4" R=15 X=0 basefreq=60
+
+New "Line.SBT_LinhaA" phases=4 bus1="barra1.1.2.3.4" bus2="barra2.1.2.3.4" linecode="BT810_BT810_4_3_4_4"
+New "Line.SBT_LinhaB" phases=4 bus1="barra2.1.2.3.4" bus2="barra3.1.2.3.4" linecode="BT810_BT810_4_3_4_4"
+
+New "Line.RBT_Ramal1" phases=2 bus1="barra3.3.4" bus2="barraA.1.4" linecode="CABBTG01_4_1_2" 
+New "Load.BT_CargaA" bus1="barraA.1.4" phases=2 conn=Delta model=2 kv=0.220000000 kw = 10 pf=0.92 status=variable daily="RES1_12_DU"  
+
+New "Line.RBT_Ramal2" phases=2 bus1="barra3.3.4" bus2="barraB.2.4" linecode="CABBTG01_4_1_2" 
+New "Load.BT_CargaB" bus1="barraB.2.4" phases=2 conn=Delta model=2 kv=0.220000000 kw = 8 pf=0.92 status=variable daily="RES1_12_DU"
+
+New "Line.RBT_Ramal3" phases=2 bus1="barra3.3.4" bus2="barraC.3.4" linecode="CABBTG01_4_1_2" 
+New "Load.BT_CargaC" bus1="barraC.3.4" phases=2 conn=Delta model=2 kv=0.220000000 kw = 12 pf=0.92 status=variable daily="RES1_12_DU"
+
+Set mode = daily
+Set Voltagebases = [0.22 0.24 13.8]
+Calc Voltagebases
+Set tolerance = 0.0001
+Set maxcontroliter = 10
+!Set algorithm = newton
+!Solve mode = direct
+Solve
