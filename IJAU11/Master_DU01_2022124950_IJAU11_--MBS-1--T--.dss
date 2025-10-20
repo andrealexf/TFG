@@ -27,9 +27,10 @@ New monitor.TOTALpower element=line.SMT_1128316 terminal=1 mode=1 ppolar=no
 
 New energymeter.source element=line.SMT_1128316 terminal=1
 
-!set datapath = "C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\BRR-PVSyst"
+set datapath = "C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\BRR-PVSyst"
 !redirect "redirect1.0.dss"
 !redirect "trf167839-mult1.5-pv.dss"
+!set datapath = "C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS\IJAU11"
 
 
 !set datapath = "C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\Resultados\Verbose\mult1.0"

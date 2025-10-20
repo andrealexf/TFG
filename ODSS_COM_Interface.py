@@ -50,13 +50,9 @@ DSSObj.AllowForms = 0
 
 DSSText.Command = 'clear'
 DSSText.Command = 'Compile ' + mydir + '/Master_DU01_2022124950_IJAU11_--MBS-1--T--.dss'
-#DSSText.Command = 'Compile ' + mydir + '/circuitoexemplo.dss'
 
 
-nome_arquivo = "ramal.txt"
 diretorio = os.path.dirname(os.path.abspath(__file__))
-arquivoramal = os.path.join(diretorio, nome_arquivo)
-
 arquivoBT = r"C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS\IJAU11\CargasBT_DU01_2022124950_IJAU11_--MBS-1--T--.dss"
 #arquivoBT = r"C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS\circuitoexemplo.dss" #circuito exemplo
 arquivoLS = r"C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS\IJAU11\CurvaCarga_2022124950_IJAU11_--MBS-1--T--.dss"
@@ -96,7 +92,7 @@ def getLoads(transformer, contadorOvervoltage):
         if busLoads(bus2):
 
             m1m2 = busLoads(bus2)
-            print(" ", m1m2) #envia como bus2 mas carga só possui uma bus (na função está como bus1)
+            #print(" ", m1m2) #envia como bus2 mas carga só possui uma bus (na função está como bus1)
 
             if (m1m2[0].split("_", 1)[1])[:2] != "ip":
                 #print(" ", m1m2)
@@ -117,6 +113,8 @@ def getLoads(transformer, contadorOvervoltage):
     defineBranchName(ramal)
     print("")
     print("Número de cargas no transformador (excluindo iluminação):", len(loadList), loadList)
+    print("OverloadsList:", len(overVoltageList), overVoltageList)
+    print("")
 
     return loadList, overVoltageList
 
@@ -210,6 +208,7 @@ def voltageBus(bus1, load=None, contadorOvervoltage=None):
         print("     (p.u., ang): ", pu_round)
 
         if overvoltage(pu_round, contadorOvervoltage):
+
             return True
 
     else: #linhas e transformadores
@@ -313,3 +312,47 @@ def contador(contador: int):
     contador += 1
     return contador
 
+def removePV(overvoltageList: list, transformer: str):
+    filename = transformer + "-hc-pv.dss"
+    padrao = re.compile(r'PVsystem\.GD\.\s*([^"\s]+)', re.IGNORECASE)
+    arquivoHC = pv_dir / filename
+    novoHC = "novo-" + filename + ".temp"
+
+    # newline="" ao ler e escrever ajuda a não duplicar/quebrar quebras de linha
+    with open(arquivoHC, "r", encoding="utf-8", newline="") as fin, \
+         open(novoHC, "w", encoding="utf-8", newline="") as fout:
+
+        pula = 0
+        prev_blank = False  #ultima linha em branco?
+
+        for linha in fin:
+
+            if linha.endswith("\r\n"):
+                linha = linha[:-2] + "\n"
+
+            m = padrao.search(linha)
+
+            if m:
+                alvo = m.group(1).upper()
+                for cargaOver in overvoltageList:
+                    if alvo == str(cargaOver).upper():
+                        pula = 3
+                        break
+
+            if pula > 0:
+                pula -= 1
+                prev_blank = False
+                continue
+
+            is_blank = (linha.strip() == "")
+            if not is_blank:
+                fout.write(linha)
+                prev_blank = False
+
+            else:
+
+                if not prev_blank:
+                    fout.write(linha)
+                    prev_blank = True
+
+    os.replace(novoHC, arquivoHC)

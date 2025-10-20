@@ -2,7 +2,7 @@ import json
 import os
 from pathlib import Path
 
-from ODSS_COM_Interface import getLoads, solvetrf, createGD2, findLoad, verboseSolve, DSSCircuit
+from ODSS_COM_Interface import getLoads, createGD2, findLoad, verboseSolve, DSSCircuit
 
 if __name__ == "__main__":
 
@@ -25,12 +25,6 @@ if __name__ == "__main__":
         5: 2.0
     }
 
-    mult2 = {
-        0: 1.0,
-        1: 1.5,
-        2: 2.0
-    }
-
     for j in range(2):
         cargasBTList = []
 
@@ -50,7 +44,7 @@ if __name__ == "__main__":
         txtVP = (Path(r"C:\\Users\\Andre\\Downloads\\TFG\\Desenvolvimento-SegundoSemestre\\Resultados\\Verbose") / txt).resolve()
         #print(txtVP)
         datapath = str(txtVP)
-        #verboseSolve(datapath)
+        verboseSolve(datapath)
 
     kW_BC = DSSCircuit.TotalPower[0]  # in kW
     kvar_BC = DSSCircuit.TotalPower[1]  # in kVAr
