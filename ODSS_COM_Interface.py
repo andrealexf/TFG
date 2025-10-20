@@ -124,7 +124,7 @@ def createGD2(nomeBairro, loadList: list[cargaBT], mult: float = 1.0, limpar: bo
         txt = nomeBairro + "-mult" + str(mult) + "-pv.dss"
 
     else:
-        txt = 'trf167839-hc-pv.dss'
+        txt =  nomeBairro + "-pv.dss"
 
     pvdss = pv_dir / txt
 
@@ -298,8 +298,10 @@ def defineBranchName(alvo: str) -> bool:
 def solvetrf(alvo):
 
     #txt = '/trf167839-mult' + str(mult) + '-pv.dss'
-    txt = '"trf167839-hc-pv.dss"'
+    txt = "'" + alvo + "-pv.dss'"
 
+    DSSText.Command = 'clear'
+    DSSText.Command = 'Compile ' + mydir + '/Master_DU01_2022124950_IJAU11_--MBS-1--T--.dss'
     DSSText.Command = 'set datapath="C:\\Users\\Andre\\Downloads\\TFG\\Desenvolvimento-SegundoSemestre\\BRR-PVSyst"'
     DSSText.Command = 'redirect '+ txt
 
