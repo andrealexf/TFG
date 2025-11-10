@@ -3,12 +3,14 @@ set datapath = "C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGI
 
 Redirect "CircuitoMT_2022124950_IJAU11_--MBS-1--T--.dss"
 
+
 New "LoadShape.PVIrrad_diaria" npts=24 interval=1 
 ~ mult = [0 0 0 0 0 0 0.1 0.2 0.3 0.5 0.8 0.9 1.0 1.0 0.99 0.9 0.7 0.4 0.1 0 0 0 0 0] 
 New XYCurve.MyPvsT npts=4  xarray=[0  25  75  100]  yarray=[1.2 1.0 0.8  0.6] 
 New XYCurve.MyEff npts=4  xarray=[0.1  0.2  0.4  1.0]  yarray=[0.86  0.9  0.93  0.97] 
 New Tshape.MyTemp npts=24 interval=1 
 ~ temp=[25, 25, 25, 25, 25, 25, 25, 25, 35, 40, 45, 50, 60, 60, 55, 40, 35, 30, 25, 25, 25, 25, 25, 25]
+
 
 Redirect "CodCondutor_2022124950_IJAU11_--MBS-1--T--.dss"
 Redirect "TransformadorMTMTMTBT_2022124950_IJAU11_--MBS-1--T--.dss"
@@ -25,31 +27,71 @@ Redirect "CargasMT_DU01_2022124950_IJAU11_--MBS-1--T--.dss"
 New monitor.TOTALvoltage element=line.SMT_1128316 terminal=1 mode=0
 New monitor.TOTALpower element=line.SMT_1128316 terminal=1 mode=1 ppolar=no
 
-New energymeter.source element=line.SMT_1128316 terminal=1
+New monitor.hcpower element=transformer.trf_167839A terminal=1 mode=1 ppolar=no 
+
+New energymeter.MT element=line.SMT_1128316 terminal=1
+
+!New energymeter.trf167839 element=transformer.trf_167839a terminal=1 
+New monitor.trfvoltage element=transformer.trf_167839a terminal=1 mode=0
+New monitor.trfpower element=transformer.trf_167839a terminal=1 mode=1 ppolar=no
+
 
 set datapath = "C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\BRR-PVSyst"
-!redirect "redirect1.0.dss"
-!redirect "trf167839-mult1.5-pv.dss"
-!set datapath = "C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS\IJAU11"
+!redirect "redirect0.2.dss"
 
+!redirect "avenida-mult1.0-pv.dss"
+!redirect "vilarubens-mult0.2-pv.dss"
+!redirect "pinheirinho-mult1.0-pv.dss"
 
-!set datapath = "C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\Resultados\Verbose\mult1.0"
+!redirect "trf_167839-hc-pv.dss"
 
-!Set mode = daily
-Set mode = snapshot
-Set Voltagebases = [0.22 0.24 13.8]
-Calc Voltagebases
+set datapath = "C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS\IJAU11"
+
+!set datapath = "C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\Resultados\Verbose"
+
+Set mode = daily
+!Set mode = snapshot
+set controlmode=static
+Set voltagebases= [0.22 0.24 13.8]
+CalcVoltageBases
 Set tolerance = 0.0001
 Set maxcontroliter = 10
 !Set algorithm = newton
 !Solve mode = direct
-Solve
+Set normvminpu=0.95
+Set normvmaxpu=1.05
+Set emergvminpu=0.90
+Set emergvmaxpu=1.10
+
+set stepsize = 0.25h
+solve number=52
+!Solve 
 
 
+
+/*
+set mode=daily
+set number=52
+
+set DemandInterval=true
+set overloadreport=true
+set voltexceptionreport=true
+set DIVerbose=true
+
+solve
+closeDI
+*/
+
+!Plot monitor object=trfvoltage channels=(1 3 5) bases=[7967 7967 7967]
+!Plot monitor object=trfpower channels=(1 3 5) 
 !Plot monitor object=TOTALvoltage channels=(1 3 5) bases=[7967 7967 7967]
 !Plot monitor object=TOTALpower channels=(1 3 5) 
+!Plot monitor object=hcpower channels=(1 3 5) 
 
-!set datapath = "C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS\IJAU11"
+set datapath = "C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\QGIS-OPENDSS\IJAU11"
 buscoords buscoords.csv
+!Plot Circuit
+!plot profile
+!export voltages
 
 

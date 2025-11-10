@@ -264,7 +264,7 @@ def overvoltage(tupla, contadorOvervoltage: int):
 
     if any(valor > 1.05 for valor in tupla[::2]):
 
-        print("Valor maior que 1.05")
+        print("Valor maior que 1.045")
         contadorOvervoltage = contador(contadorOvervoltage)
         return True
 
@@ -306,8 +306,9 @@ def solvetrf(alvo):
     DSSText.Command = 'redirect '+ txt
 
     DSSText.Command = 'set datapath="C:\\Users\\Andre\\Downloads\\TFG\\Desenvolvimento-SegundoSemestre\\QGIS-OPENDSS\\IJAU11"'
-    DSSText.Command = 'set mode=snapshot'
-    DSSText.Command = 'solve'
+    DSSText.Command = 'set mode=daily'
+    DSSText.Command = 'set stepsize = 0.25h'
+    DSSText.Command = 'solve number=52'
 
 def contador(contador: int):
 
@@ -358,3 +359,4 @@ def removePV(overvoltageList: list, transformer: str):
                     prev_blank = True
 
     os.replace(novoHC, arquivoHC)
+

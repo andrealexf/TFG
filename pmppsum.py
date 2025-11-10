@@ -7,10 +7,31 @@ path = r"C:\Users\Andre\Downloads\TFG\Desenvolvimento-SegundoSemestre\BRR-PVSyst
 padrao = re.compile(r'.*?pmpp\s*=([^ ]+)', re.IGNORECASE)
 bairros = ["arearural","avenida","boavista","bps","centro","chacaradasmocas","cruzeiro","jardimamerica","morrochic","pinheirinho","santarosa","varginha","vilaisabel","vilapoddis","vilarubens"]
 
-nome_arquivo = "pmpps.txt"
+nome_arquivo = "pmppcertos.txt"
 diretorio = os.path.dirname(os.path.abspath(__file__))
 arquivo = os.path.join(diretorio, nome_arquivo)
 
+
+#ler 1 arquivo
+pmpplist = []
+arc = path + rf"\trf_167839-hc-pv.dss"
+with open(arc, "r", encoding="utf-8") as f:
+    for last, linha in enumerate(f, start=1):
+        m = padrao.search(linha)
+
+        if not m:
+            continue
+
+        pmppencontrado = m.group(1).strip()
+        # print(pmppencontrado)
+        pmpplist.append(float(pmppencontrado))
+        pass
+
+print(sum(pmpplist))
+
+
+
+'''
 with open(arquivo, "w", encoding="utf-8") as f:
     f.write('')
 
@@ -66,4 +87,28 @@ with open(arquivo, "a", encoding="utf-8") as f:
     f.write(str(re2))
 
 
+pmpptotal = []
+for i in range(len(bairros)):
 
+    nomebairro = str(bairros[i])
+    arc = path + rf"\{nomebairro}-mult0.1-pv.dss"
+    pmpplist = []
+
+    with open(arc, "r", encoding="utf-8") as f:
+        for last, linha in enumerate(f, start=1):
+            m = padrao.search(linha)
+
+            if not m:
+                continue
+
+            pmppencontrado = m.group(1).strip()
+            # print(pmppencontrado)
+            pmpplist.append(float(pmppencontrado))
+            pass
+
+    print(nomebairro,"soma pmpp = ",round(sum(pmpplist),2))
+    pmpptotal.append(sum(pmpplist))
+
+print("Total: ", round(sum(pmpptotal),2))
+print("Porcenagem: ", round(sum(pmpptotal)*100/6582.13,2))
+'''

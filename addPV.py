@@ -17,11 +17,11 @@ if __name__ == "__main__":
         bairros[lista] = [int(x) for x in listaTrafo]
 
     mult = {
-        0: 1.0,
-        1: 1.2,
-        2: 1.4,
-        3: 1.6,
-        4: 1.8,
+        0: 0.41,
+        1: 0.43,
+        2: 0.23,
+        3: 0.25,
+        4: 2.0,
         5: 2.0
     }
 
@@ -44,7 +44,7 @@ if __name__ == "__main__":
         txtVP = (Path(r"C:\\Users\\Andre\\Downloads\\TFG\\Desenvolvimento-SegundoSemestre\\Resultados\\Verbose") / txt).resolve()
         #print(txtVP)
         datapath = str(txtVP)
-        verboseSolve(datapath)
+        #verboseSolve(datapath)
 
     kW_BC = DSSCircuit.TotalPower[0]  # in kW
     kvar_BC = DSSCircuit.TotalPower[1]  # in kVAr
